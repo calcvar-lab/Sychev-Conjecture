@@ -1,0 +1,63 @@
+name: Visual Paper Pages
+
+on:
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: Publish the Visual Paper and PDF after rights clearance
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: visual-paper-pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - name: Verify and stage the static site
+        run: |
+          test -s website/index.html
+          test -s paper/article.pdf
+          grep -Fq 'href="../paper/article.pdf"' website/index.html
+          mkdir -p _site/website _site/paper
+          cp website/index.html _site/website/index.html
+          cp paper/article.pdf _site/paper/article.pdf
+          cat > _site/index.html <<'HTML'
+          <!doctype html>
+          <html lang="en">
+          <head>
+            <meta charset="utf-8">
+            <meta http-equiv="refresh" content="0; url=./website/">
+            <title>Sychev-Conjecture Visual Paper</title>
+          </head>
+          <body><a href="./website/">Open the Visual Paper</a></body>
+          </html>
+          HTML
+      - name: Upload Pages artifact
+        if: inputs.publish && github.ref_name == github.event.repository.default_branch
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+
+  deploy:
+    if: inputs.publish && github.ref_name == github.event.repository.default_branch
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,29 @@
+cff-version: 1.2.0
+message: "Pour citer ce projet, utilisez la référence à l’article ci-dessous."
+title: "Sychev-Conjecture"
+repository-code: "https://github.com/calcvar-lab/Sychev-Conjecture"
+authors:
+  - given-names: Omar
+    family-names: Anza Hafsa
+    affiliation: "Nîmes Université, Laboratoire MIPA"
+  - given-names: Adel
+    family-names: Hachache
+    affiliation: "Nîmes Université, Laboratoire MIPA"
+  - given-names: Jean-Philippe
+    family-names: Mandallena
+    affiliation: "Nîmes Université, Laboratoire MIPA"
+preferred-citation:
+  type: unpublished
+  status: preprint
+  title: "Sychev's conjecture and Tonelli's partial regularity for one-dimensional obstacle problems"
+  year: 2026
+  authors:
+    - given-names: Omar
+      family-names: Anza Hafsa
+      affiliation: "Nîmes Université, Laboratoire MIPA"
+    - given-names: Adel
+      family-names: Hachache
+      affiliation: "Nîmes Université, Laboratoire MIPA"
+    - given-names: Jean-Philippe
+      family-names: Mandallena
+      affiliation: "Nîmes Université, Laboratoire MIPA"

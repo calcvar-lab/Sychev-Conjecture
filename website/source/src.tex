@@ -1,0 +1,1884 @@
+\documentclass[reqno,12pt]{amsart}
+
+\usepackage{hyperref}
+\usepackage[foot]{amsaddr}
+\usepackage{amsmath}
+\usepackage{mathabx}
+\usepackage{amssymb}
+\usepackage{dsfont}
+\usepackage{enumitem}
+\usepackage{bold-extra}
+\usepackage{color}
+\usepackage{mathrsfs}
+\usepackage{BOONDOX-cal}
+\usepackage{BOONDOX-frak}
+\usepackage{mathtools}
+\usepackage[headings]{fullpage}
+\usepackage{tikz}
+\usetikzlibrary{positioning,fit,backgrounds,arrows.meta}
+\usepackage[font=footnotesize]{caption}
+\usepackage{needspace}
+\usepackage{placeins}
+\usepackage{float}
+
+\numberwithin{equation}{section}
+\parindent=0mm
+\raggedbottom
+
+\def\RR{{\mathds R}}
+\def\eps{\varepsilon}
+\def\then{\Rightarrow}
+\def\J{\mathcal{J}_L}
+\def\A{\mathcal{A}_{f,g}}
+\def\Sol{\mathcal{S}_{f,g}}
+\def\limsup{\mathop{\overline{\lim}}}
+\def\liminf{\mathop{\underline{\lim}}}
+\def\proofname{{\bf Proof}}
+\renewcommand{\qedsymbol}{$\blacksquare$}
+\renewcommand{\qed}{\leavevmode\unskip\nobreak\ \qedsymbol}
+
+%%% Lists of hypotheses
+
+\newlist{HypH}{enumerate}{1}
+\setlist[HypH,1]{label={{\sf ({H}$_\arabic*$)}}}
+
+\newlist{HypSym}{enumerate}{1}
+\setlist[HypSym,1]{label={{\sf ({S}$_\arabic*$)}}}
+
+\def\Of{{\sf (O$_f$)}}
+\newcommand{\Rv}{\hyperref[HypS1]{{\sf (R$_{\rm v}$)}}}
+\newcommand{\Rh}{\hyperref[HypS2]{{\sf (R$_{\rm h}$)}}}
+\def\Og{{\sf (O$_g$)}}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{remark}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+
+
+
+\title[{\tiny Sychev's conjecture and Tonelli's partial regularity}]{Sychev's conjecture and Tonelli's partial regularity for one-dimensional obstacle problems}
+
+
+
+\author{\sc Omar Anza Hafsa}
+\address{({\rm Omar Anza Hafsa}) N\^\i mes Universit\'e, Laboratoire MIPA, Site des Carmes, Place Gabriel P\'eri, 30021 N\^\i mes, France.}
+\email{omar.anza-hafsa@unimes.fr}
+\author{\sc Adel Hachache}
+\address{({\rm Adel Hachache}) N\^\i mes Universit\'e, Laboratoire MIPA, Site des Carmes, Place Gabriel P\'eri, 30021 N\^\i mes, France.}
+\email{adel.hachache@unimes.fr}
+\author{Jean-Philippe Mandallena}
+\address{{\rm(Jean-Philippe Mandallena)}  N\^\i mes Universit\'e, Laboratoire MIPA, Site des Carmes, Place Gabriel P\'eri, 30021 N\^\i mes, France.}
+\email{jean-philippe.mandallena@unimes.fr}
+
+\keywords{One-dimensional variational problems, obstacle problems, Tonelli's partial regularity, Sychev's conjecture, Dini derivatives.}
+
+\begin{document}
+
+\maketitle
+\begin{abstract}
+We prove that, for a Lagrangian which is locally H\"older continuous in the position variables and globally elliptic, every finite energy solution of the one-dimensional obstacle problem has Tonelli's partial regularity, provided that, at the contact points, the lower obstacle has no concave corner and the upper one no convex corner, in the sense of Dini derivatives. This applies to obstacles with a derivative in $[-\infty,\infty]$ at every point, and in particular to obstacles with Tonelli's partial regularity: this proves Sychev's conjecture for finite energy solutions. It also applies to differentiable obstacles, with no Dini-type condition on their moduli of continuity.
+\end{abstract}
+
+
+
+\tableofcontents
+
+
+\newpage
+
+
+
+\section{\textsc{\textsf{Introduction}}}
+
+Tonelli's partial regularity theorem \cite{tonelli} states that minimizers of smooth elliptic one-dimensional variational problems have a continuous derivative with values in $[-\infty,\infty]$, which is infinite only on a closed null set. This set may be nonempty \cite{ball-mizel85}. Clarke and Vinter extended the theorem to less regular Lagrangians \cite{clarke-vinter85}, and Sychev, comparing with chords, to locally H\"older continuous ones \cite{sychev89,sychev91,sychev92}. H\"older continuity cannot be weakened to continuity \cite{gratwick-preiss11}. See also \cite{Reshetnyak-book82,GST16,buttazzo-Giaquinta-hildebrandt98}.
+
+\medskip
+
+For obstacle problems, Lipschitz solutions exist for close obstacles of class $C^1$ or $C^{1,\sigma}$ \cite{sychev11}, and Tonelli's partial regularity holds for $C^1$ obstacles satisfying a Dini-type condition \cite{mandallena18} (see also \cite{gratwick-sychev19}; see \cite{mandallena19} for $C^1$-regularity). The following problem was posed by M.~A.~Sychev to the third author: do the solutions inherit Tonelli's partial regularity from the obstacles? Sychev conjectured that they do, and we show that this is indeed the case for all finite energy solutions (Corollary \ref{C-sychev}). This is the natural setting of the problem: if every admissible function has infinite energy, then every admissible function is a solution (Remark \ref{Remark-on-results}(c)), and no regularity can be expected.
+
+\medskip
+
+We prove that every finite energy solution has Tonelli's partial regularity, as soon as, at the contact points, the lower obstacle has no ``concave corner'' and the upper one no ``convex corner'' (Theorem \ref{T-main}). This contains Sychev's conjecture (Corollary \ref{C-sychev}) and removes the Dini-type condition of \cite{mandallena18} (Corollary \ref{C-C1}); see Figure \ref{Fig-results}.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[font=\footnotesize]
+% ---------- (a) classes of obstacles
+\begin{scope}
+  \draw[rounded corners=6pt, draw=red!60!black, fill=red!6] (0,0) rectangle (7.6,5.0);
+  \node[anchor=north west, align=left, text=red!60!black] at (0.1,4.95) {\Of, \Og\ at the contact points\\ \textbf{Theorem \ref{T-main}}};
+  \draw[rounded corners=6pt, draw=orange!75!black, fill=orange!8] (0.35,0.3) rectangle (7.25,3.95);
+  \node[anchor=north west, align=left, text=orange!75!black] at (0.45,3.9) {derivative in $[-\infty,\infty]$ on $]a,b[$, e.g.\ $W^{1,1}_{\rm T}$\\ \textbf{Corollary \ref{C-sychev}} (Sychev's conjecture)};
+  \draw[rounded corners=6pt, draw=green!45!black, fill=green!8] (0.7,0.6) rectangle (6.9,2.85);
+  \node[anchor=north west, align=left, text=green!45!black] at (0.8,2.8) {differentiable on $]a,b[$, e.g.\ $C^1$\\ \textbf{Corollary \ref{C-C1}}};
+  \draw[rounded corners=6pt, draw=blue!60!black, fill=blue!7] (1.05,0.9) rectangle (6.55,1.75);
+  \node[align=center, text=blue!60!black] at (3.8,1.325) {$C^1$ + Dini-type condition \cite{mandallena18}};
+  \node[font=\small] at (3.7,-0.95) {(a) classes of obstacles};
+\end{scope}
+% ---------- (b) convex corner of f
+\begin{scope}[shift={(10.5,3.6)}, x=1.2cm, y=1.2cm]
+  \draw[thick, gray] (-1,0.6) -- (0,-0.2) -- (1,0.6) node[below right, black] {$f$};
+  \draw[very thick, domain=-1:1, samples=40, smooth] plot (\x, {0.4+0.45*\x*\x}) node[above right] {$u$};
+  \fill[gray] (0,-0.2) circle (1.3pt);
+  \node[align=center] at (0,-0.65) {convex corner of $f$: \Of\ holds,\\ no contact at the corner};
+\end{scope}
+% ---------- (c) concave corner of f
+\begin{scope}[shift={(10.5,0.95)}, x=1.2cm, y=1.2cm]
+  \draw[thick, gray] (-1,-0.2) -- (0,0.6) -- (1,-0.2) node[right, black] {$f$};
+  \draw[very thick] (-1,0.1) .. controls (-0.7,0.15) .. (-0.5,0.2) -- (0,0.6) -- (0.5,0.2) .. controls (0.7,0.15) .. (1,0.1) node[above right] {$u$};
+  \fill (0,0.6) circle (1.5pt);
+  \node[align=center] at (0,-0.85) {concave corner of $f$: \Of\ fails,\\ $u=f$ may have a corner};
+\end{scope}
+\node[font=\small] at (10.5,-0.95) {(b) corners of the lower obstacle};
+\end{tikzpicture}
+\caption{(a) The obstacles covered by the results, from the most general class (Theorem \ref{T-main}) to the $C^1$ obstacles with a Dini-type condition of \cite{mandallena18}. (b) A convex corner of the lower obstacle is allowed, but the solution cannot touch it there (Theorem \ref{T-main}(i)). A concave corner at a contact point is excluded (Remark \ref{Remark-on-results}(b)). For the upper obstacle, convex and concave are exchanged.}\label{Fig-results}
+\end{figure}
+
+
+\medskip
+
+{\bf Main idea.} In \cite{mandallena18} (see also \cite{gratwick-sychev19}), chords of the solution are truncated by the obstacles, at the cost of an error term involving their moduli of continuity. Here we only use chords on the {\em free side} of the solution: above it near the lower obstacle, below it near the upper one. These chords are always admissible (Lemma \ref{L-free} and Figure \ref{Fig-free-chords}). They make the solution approximately concave near the lower obstacle (Lemma \ref{L-conc}), so that it has one-sided derivatives and no convex corner there (Lemma \ref{L-corner}). At a contact point, the obstacle provides the missing inequality. This is the only use of \Of\ and \Og.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[x=1.5cm, y=1.5cm, font=\small,
+  declare function={U(\t)=1.5-0.5*(\t-3)^2+0.09*(\t-3)^4; F(\t)=0.2+1.3*exp(-(\t-3)^2/0.25);}]
+  % obstacles and solution
+  \draw[thick, domain=0.5:5.5, samples=60, smooth] plot (\x, {2.6+0.1*sin(deg(1.6*\x))}) node[right] {$g$};
+  \draw[thick, gray, domain=0.5:5.5, samples=120, smooth] plot (\x, {F(\x)}) node[right, black] {$f$};
+  \draw[very thick, domain=0.5:5.5, samples=120, smooth] plot (\x, {U(\x)}) node[right] {$u$};
+  % contact point
+  \fill (3,1.5) circle (1.6pt);
+  \draw[densely dotted] (3,1.5) -- (3,0) node[below] {$x_0$};
+  % chord below u: crosses f
+  \draw[thick, dashed] (2.3,{U(2.3)}) -- (3.7,{U(3.7)});
+  \fill (2.3,{U(2.3)}) circle (1.3pt) (3.7,{U(3.7)}) circle (1.3pt);
+  \node[align=center, font=\footnotesize] (nb) at (1.3,2.15) {chord below $u$:\\ crosses $f$};
+  \draw[->, thin] (nb.south east) to[bend right=15] (2.6,{U(2.3)+0.02});
+  % chord above u: admissible
+  \draw[thick] (3.9,{U(3.9)}) -- (5.3,{U(5.3)});
+  \fill (3.9,{U(3.9)}) circle (1.3pt) (5.3,{U(5.3)}) circle (1.3pt);
+  \node[align=center, font=\footnotesize] (na) at (4.85,2.15) {chord above $u$:\\ admissible};
+  \draw[->, thin] (na.south) to[bend left=10] (4.75,{(U(3.9)*0.45+U(5.3)*0.55)+0.03});
+  % axis
+  \draw[->] (0.4,0) -- (5.9,0) node[right] {$x$};
+\end{tikzpicture}
+\caption{Near a point $x_0$ of contact with the lower obstacle $f$. The solid chord lies above $u$, hence between $f$ and $g$: it is an admissible competitor. The dashed chord lies below $u$ and passes under the top of $f$: it is not admissible. Only chords of the first kind are used.}\label{Fig-free-chords}
+\end{figure}
+
+\medskip
+
+{\bf Plan of the paper.} The results are stated in Section \ref{Sect-Main-Results}. After the preliminaries of Section \ref{Sect-Preliminaries}, Section \ref{Sect-Concavity} describes the local structure of the solution near the obstacles: approximate concavity near the lower one, approximate convexity near the upper one, and one-sided derivatives. From this, Section \ref{Sect-Proof-Main} derives the main theorem. Figure \ref{Fig-architecture} summarizes this structure.
+
+
+
+
+
+
+
+\medskip
+
+{\bf Notation.} Throughout the paper, we use the following notation.
+\begin{enumerate}[labelindent=3em, leftmargin=2em, itemsep=0.6em, topsep=0.6em]
+\item[$\bullet$] $a<b$ are two real numbers and $A,B\in\RR$.
+\item[$\bullet$] $W^{1,1}([a,b])$ is the space of absolutely continuous functions from $[a,b]$ to $\RR$, and $\mathcal{L}^1$ is the Lebesgue measure on $\RR$.
+\item[$\bullet$] For $u\in C([a,b])$ and $s<t$ in $[a,b]$, the slope of $u$ on $[s,t]$ and the chord function of $u$ on $[s,t]$ are
+\begin{equation*}
+k_u(s,t):=\frac{u(t)-u(s)}{t-s}\qquad\hbox{and}\qquad u_{s,t}(x):=\begin{cases}u(s)+k_u(s,t)(x-s)&\hbox{if }x\in[s,t],\\ u(x)&\hbox{otherwise.}\end{cases}
+\end{equation*}
+\item[$\bullet$] For $h\in C([a,b])$ and $x\in]a,b[$, we set
+\begin{equation}\label{Dini-right}
+\left\{\begin{aligned}
+D^+h(x)&:=\limsup_{t\to0^+}k_h(x,x+t)\\
+D_+h(x)&:=\liminf_{t\to0^+}k_h(x,x+t)
+\end{aligned}\right.
+\end{equation}
+and
+\begin{equation}\label{Dini-left}
+\left\{\begin{aligned}
+D^-h(x)&:=\limsup_{t\to0^+}k_h(x-t,x)\\
+D_-h(x)&:=\liminf_{t\to0^+}k_h(x-t,x).
+\end{aligned}\right.
+\end{equation}
+The quantities in \eqref{Dini-right} are called the {\em right Dini derivates} of $h$ at $x$, and those in \eqref{Dini-left} the {\em left Dini derivates}.
+\needspace{6\baselineskip}
+\item[$\bullet$] A function $u\in W^{1,1}([a,b])$ has {\em Tonelli's partial regularity}, and we write $u\in W^{1,1}_{\rm T}([a,b])$, if:
+\begin{enumerate}[label=(\alph*), leftmargin=2em, itemsep=0.2em, topsep=0.3em]
+\item $u^\prime(x)$ exists in $[-\infty,\infty]$ at every $x\in[a,b]$ (one-sided at $a$ and $b$);
+\item $u^\prime\in C([a,b];[-\infty,\infty])$;
+\item $\Omega_u:=\{x\in[a,b]:u^\prime(x)\in\RR\}$ is open in $[a,b]$ and $\mathcal{L}^1([a,b]\setminus\Omega_u)=0$.
+\end{enumerate}
+\end{enumerate}
+
+
+
+
+
+\FloatBarrier
+
+\begin{figure}[H]
+\centering
+\scalebox{0.93}{\begin{tikzpicture}[y=0.72cm,
+  font=\footnotesize,
+  box/.style={draw, rounded corners=2pt, fill=white, align=center, text width=3.6cm, minimum height=0.9cm, inner sep=2.5pt},
+  hyp/.style={box, dashed, fill=yellow!12},
+  main/.style={box, very thick, draw=red!60!black, fill=red!4},
+  arr/.style={-{Stealth[length=2.2mm]}, thick, draw=black!75},
+  s3/.style={draw=blue!60!black, fill=blue!3},
+  s4/.style={draw=green!45!black, fill=green!3},
+  s5/.style={draw=orange!75!black, fill=orange!4},
+  s2/.style={draw=red!60!black, fill=red!3},
+  a3/.style={arr, draw=blue!60!black},
+  a4/.style={arr, draw=green!45!black},
+  a5/.style={arr, draw=orange!75!black},
+  a2/.style={arr, draw=red!60!black},
+  lab/.style={font=\scriptsize, fill=white, rounded corners=1pt, inner sep=1pt},
+  band/.style={fill=gray!10, rounded corners=4pt, inner sep=7pt},
+  bandtitle/.style={font=\scriptsize\bfseries\sffamily, anchor=south east, inner sep=2pt}
+]
+% hypotheses
+\node[hyp] (H) at (5,1.9) {\ref{HypH1}, \ref{HypH2}, $u\in\Sol$,\\ $\J(u;[a,b])<\infty$};
+% Section 3
+\node[box, s3] (A) at (0,0) {a priori bounds\\(Lemma~\ref{L-apriori})};
+\node[box, s3] (B) at (5,0) {good intervals and inequality \eqref{good}};
+\node[box, s3] (C) at (10,0) {intervals of lower and upper type (Def.~\ref{Def-types})};
+\node[box, s3] (D) at (0,-2.1) {basic estimate\\(Lemma~\ref{L-good})};
+\node[box, s3] (S) at (5,-2.4) {symmetries (Lemma~\ref{L-sym}): lower $\leftrightarrow$ upper type, right $\leftrightarrow$ left};
+\node[box, s3] (F) at (10,-2.1) {free chords\\(Lemma~\ref{L-free})};
+\node[box, s3] (T) at (0,-4.2) {$\Theta$, $E$\\(Lemma~\ref{L-Theta})};
+% Section 4
+\node[box, s4] (G) at (5,-7.0) {approximate concavity\\(Lemma~\ref{L-conc})};
+\node[box, s4] (M1) at (0,-8.9) {one-sided monotonicity of slopes (Lemma~\ref{L-mono})};
+\node[box, s4] (I) at (10,-8.9) {one-sided derivatives, no convex corner (Lemma~\ref{L-corner})};
+% Section 5
+\node[hyp] (O) at (5,-12.0) {\Of, \Og\\(at contact points)};
+\node[box, s5] (J) at (10,-12.0) {existence of $u^\prime$ and assertion (i) (Lemma~\ref{L-exist})};
+\node[box, s5] (K) at (0,-13.4) {strict differentiability, assertion (ii) (Lemma~\ref{L-strict})};
+% Section 2
+\node[main, text width=4.4cm] (Th) at (5,-16.3) {Theorem~\ref{T-main}\\(Tonelli's partial regularity)};
+\node[box, s2] (C1) at (0,-18.2) {Corollary~\ref{C-sychev}\\(Sychev's conjecture)};
+\node[box, s2] (C2) at (10,-18.2) {Corollary~\ref{C-C1}\\($C^1$ near contact)};
+% bands
+\begin{scope}[on background layer]
+  \node[band, fill=blue!7, fit=(A)(B)(C)(D)(S)(F)(T)] (b3) {};
+  \node[band, fill=green!8, fit=(G)(M1)(I)] (b4) {};
+  \node[band, fill=orange!10, fit=(O)(J)(K)] (b5) {};
+  \node[band, fill=red!8, fit=(Th)(C1)(C2)] (b2) {};
+\end{scope}
+\node[bandtitle, text=blue!60!black] at (b3.north east) {Section~\ref{Sect-Preliminaries}: preliminaries};
+\node[bandtitle, anchor=south, text=green!45!black] at (b4.north) {Section~\ref{Sect-Concavity}: local structure near the obstacles};
+\node[bandtitle, anchor=south, text=orange!70!black] at (b5.north) {Section~\ref{Sect-Proof-Main}: proof of the main result};
+\node[bandtitle, anchor=south, text=red!60!black] at (b2.north) {Section~\ref{Sect-Main-Results}: main results};
+% arrows
+\draw[arr] (H) -| (A);
+\draw[arr] (H) -- (B);
+\draw[a3] (A) -- (D);
+\draw[a3] (B.south west) -- (D.north east);
+\draw[a3] (B.south east) -- (F.north west);
+\draw[a3] (C) -- (F);
+\draw[a3] (D) -- node[lab, right] {\eqref{Def-Theta}} (T);
+\draw[a3] (T) |- node[lab, pos=0.75, above] {\eqref{CS}} (G);
+\draw[a3] (F) |- node[lab, pos=0.75, above] {chords above $u$} (G);
+\draw[a4] (G.south west) -- node[lab, above left] {(i), (ii)} (M1.north east);
+\draw[a4] (G.south east) -- node[lab, above right] {(iii)} (I.north west);
+\draw[a4] (M1) -- node[lab, above] {proof of (i)} (I);
+\draw[a4] (I) -- (J);
+\draw[arr] (O) -- (J);
+\draw[a4] (M1) -- (K);
+\draw[a5] ([xshift=-6mm]J.south) |- node[lab, pos=0.75, above] {$u^\prime(x_0)$ exists} (K.east);
+\draw[a5] ([xshift=6mm]J.south) |- (Th.east);
+\draw[a5] (K) |- (Th.west);
+\draw[a2] (Th.south west) -- (C1.north east);
+\draw[a2] (C1) -- (C2);
+\end{tikzpicture}}
+\caption{Architecture of the paper. Arrows indicate logical dependencies; dashed boxes contain the assumptions. The symmetries are used throughout Sections~\ref{Sect-Concavity} and~\ref{Sect-Proof-Main} to transfer statements from intervals of lower type to intervals of upper type, and from the right to the left.}\label{Fig-architecture}
+\end{figure}
+
+\section{\textsc{\textsf{Setting and main results}}}\label{Sect-Main-Results}
+
+\subsection{Setting}\label{Subsect-setting} Let $L\in C([a,b]\times\RR\times\RR)$ and let $f,g\in C([a,b])$ be such that $f<g$ on $[a,b]$. As in \cite{mandallena18}, the set of admissible functions is
+\begin{equation*}
+\A:=\Big\{u\in W^{1,1}([a,b]):u(a)=A,\ u(b)=B\hbox{ and }f\leq u\leq g\hbox{ on }[a,b]\Big\},
+\end{equation*}
+the energy of $u\in W^{1,1}([a,b])$ on an interval $I\subset[a,b]$ is
+\begin{equation*}
+\J(u;I):=\int_I L(x,u(x),u^\prime(x))dx,
+\end{equation*}
+and $\Sol$ is the set of solutions, i.e. 
+\begin{equation*}
+\Sol:=\Big\{u\in\A:\J(u;[a,b])\leq\J(v;[a,b])\hbox{ for all }v\in\A\Big\}.
+\end{equation*}
+We consider the following assumptions.
+\begin{HypH}[itemsep=0.8em, topsep=0.6em]
+\item\label{HypH1} $L$ is locally H\"older continuous with respect to $(x,w)$, locally uniformly with respect to $v$, i.e. for every compact set $G\subset[a,b]\times\RR\times\RR$, there exist $C=C(G)>0$ and $\alpha=\alpha(G)\in]0,1]$ such that
+\begin{equation*}
+|L(P_1,v)-L(P_2,v)|\leq C|P_1-P_2|^\alpha\hbox{ for all }(P_1,v),(P_2,v)\in G,
+\end{equation*}
+where $|P_1-P_2|:=|x_1-x_2|+|w_1-w_2|$ for $P_1=(x_1,w_1)$ and $P_2=(x_2,w_2)$.
+\item\label{HypH2} $L_{vv}$ exists and belongs to $C([a,b]\times\RR\times\RR)$, and there exists $\mu>0$ such that 
+\begin{equation*}
+L_{vv}\geq\mu\hbox{ on }[a,b]\times\RR\times\RR.
+\end{equation*}
+\end{HypH}
+
+\begin{remark}[Comments on the setting]\label{Remark-Lv-continuous}
+\begin{enumerate}[leftmargin=2em, itemsep=1em, topsep=0.6em]
+\item[(a)] {\sf Continuity of $L_v$.} As in \cite{mandallena18}, \ref{HypH2} implicitly means that $L_v$ exists. Then $L_v$ is continuous on $[a,b]\times\RR\times\RR$.
+
+$\scriptstyle\bullet$ {\em Taylor's formula.} For $h\in]0,1]$, there is $\xi\in]v,v+h[$ such that
+\begin{equation*}
+L_v(P,v)=\frac{L(P,v+h)-L(P,v)}{h}-\frac h2L_{vv}(P,\xi).
+\end{equation*}
+
+$\scriptstyle\bullet$ {\em Uniform limit.} On every compact set, the last term is bounded by $\frac h2\max|L_{vv}|$. Hence $L_v$ is the locally uniform limit, as $h\to0$, of the continuous functions
+\begin{equation*}
+(P,v)\longmapsto\frac1h\big[L(P,v+h)-L(P,v)\big].
+\end{equation*}
+
+\item[(b)] {\sf The energy is well defined on $\A$.} For every $v\in\A$, $\J(v;[a,b])$ is well defined in $]-\infty,\infty]$, so that the definition of $\Sol$ makes sense.
+
+$\scriptstyle\bullet$ {\em The graph of $v$ is bounded.} It lies in
+\begin{equation*}
+Q:=[a,b]\times\left[\min_{[a,b]}f,\max_{[a,b]}g\right].
+\end{equation*}
+
+$\scriptstyle\bullet$ {\em The integrand is bounded from below.} By Lemma \ref{L-apriori} below, see \eqref{Lower-bound-L},
+\begin{equation*}
+L(x,v(x),v^\prime(x))\geq-C_0-\frac{C_0^2}{\mu}\hbox{ for }\mathcal{L}^1\hbox{-a.a. }x\in[a,b],
+\end{equation*}
+where $C_0$ only depends on $L$, $f$ and $g$.
+
+\item[(c)] {\sf No H\"older continuity in $v$ is needed.} The condition \ref{HypH1} is weaker than the local H\"older continuity of $L$ with respect to all its variables used in \cite{mandallena18}, i.e.
+\begin{equation*}
+|L(P_1,v_1)-L(P_2,v_2)|\leq C\big(|P_1-P_2|+|v_1-v_2|\big)^\alpha\hbox{ on }G.
+\end{equation*}
+Below, \ref{HypH1} is only used at points with the same velocity variable.
+\end{enumerate}
+\end{remark}
+
+\subsection{Main results}\label{Subsect-results}
+The main result is Theorem \ref{T-main}, illustrated in Figure \ref{Fig-main}. Corollaries \ref{C-sychev} and \ref{C-C1} specialize it to obstacles having a derivative in $[-\infty,\infty]$ and to differentiable obstacles, respectively.
+
+\begin{theorem}\label{T-main}
+Assume that \ref{HypH1} and \ref{HypH2} hold. Let $u\in\Sol$ be such that $\J(u;[a,b])<\infty$, and assume that, at the contact points, the lower obstacle has no ``concave corner'' and the upper obstacle no ``convex corner'', i.e.
+\begin{enumerate}[leftmargin=3em, itemsep=0.3em, topsep=0.5em]
+\item[\Of] $D_-f(x)\leq D^+f(x)$ for all $x\in]a,b[$ such that $u(x)=f(x)${\rm;}
+\item[\Og] $D_+g(x)\leq D^-g(x)$ for all $x\in]a,b[$ such that $u(x)=g(x)$.
+\end{enumerate}
+Then $u$ has Tonelli's partial regularity. Moreover, the following two assertions hold.
+\begin{enumerate}[leftmargin=3em, itemsep=0.8em, topsep=0.5em]
+\item[{\rm(i)}] \emph{Derivative at the contact points.} For every $x\in]a,b[$, we have{\rm:}
+\begin{equation*}
+\begin{aligned}
+u(x)=f(x)&\ \Longrightarrow\ u^\prime(x)=D_-f(x)=D^+f(x);\\
+u(x)=g(x)&\ \Longrightarrow\ u^\prime(x)=D_+g(x)=D^-g(x).
+\end{aligned}
+\end{equation*}
+In particular, there is no contact at the points where the inequality in \Of\ or \Og\ is strict, i.e.
+\begin{align*}
+&\{u=f\}\cap]a,b[\ \subset\ \left\{D_-f=D^+f\right\};\\
+&\{u=g\}\cap]a,b[\ \subset\ \left\{D_+g=D^-g\right\}.
+\end{align*}
+\item[{\rm(ii)}] \emph{Strict differentiability.} For every $x_0\in[a,b]$,
+\begin{equation*}
+\lim_{\substack{[a,b]\ni s,t\to x_0\\ s<t}}k_u(s,t)=u^\prime(x_0)\hbox{ in }[-\infty,\infty].
+\end{equation*}
+\end{enumerate}
+\end{theorem}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[x=1.3cm, y=0.95cm, font=\scriptsize,
+  declare function={S(\t)=-0.45*((\t<8) ? -1 : 1)*abs(\t-8)^(1/3);
+    U(\t)=1.5+0.7*sin(deg(pi*(\t-4)/3))+S(\t);
+    F(\t)=0.2+(1.5928-0.2)*exp(-((\t-2.5633)/0.6)^2);
+    G(\t)=3.815-exp(-((\t-5.3965)/0.7)^2);
+    FC(\t)=F(\t)+1.05*max(0,1-abs(\t-7)/0.6);
+    GC(\t)=G(\t)-0.8*max(0,1-sqrt(abs(\t-9.3)/0.45));}]
+  % axis and endpoints
+  \draw[->, gray] (0.3,0) -- (10.1,0) node[right] {$x$};
+  \draw[gray] (0.5,0.05) -- (0.5,-0.05) node[below, black] {$a$};
+  \draw[gray] (9.8,0.05) -- (9.8,-0.05) node[below, black] {$b$};
+  % obstacles
+  \draw[thick, gray, domain=0.5:9.8, samples=466] plot (\x, {FC(\x)}) node[right, black] {$f$};
+  \draw[thick, gray, domain=0.5:9.8, samples=931] plot (\x, {GC(\x)}) node[right, black] {$g$};
+  % corners of the obstacles, away from the contact set
+  \node[anchor=east, align=right, fill=white, inner sep=1pt] (cf) at (6.35,0.55) {corner of $f$};
+  \draw[->, thin] (cf.east) to[bend right=25] (6.96,1.22);
+  \node[align=center, fill=white, inner sep=1pt] (cg) at (9.35,2.55) {cusp of $g$};
+  \draw[->, thin] (cg.north) -- (9.3,2.97);
+  % solution
+  \draw[very thick, red!60!black, domain=0.5:7.995, samples=200, smooth] plot (\x, {U(\x)});
+  \draw[very thick, red!60!black, domain=8.005:9.8, samples=100, smooth] plot (\x, {U(\x)}) node[right] {$u$};
+  \draw[very thick, red!60!black] (7.995,{U(7.995)}) -- (8.005,{U(8.005)});
+  % contact with f
+  \fill (2.5633,1.5928) circle (1.6pt);
+  \draw[densely dashed] (1.6,1.5928) -- (3.5,1.5928);
+  \draw[densely dotted] (2.5633,1.5928) -- (2.5633,0) node[below] {$x_1$};
+  \node[align=center, fill=white, inner sep=1.5pt] (n1) at (2.6,2.68) {$u^\prime(x_1)=D_-f(x_1)=D^+f(x_1)$};
+  \draw[->, thin] (n1.south) to[bend left=10] (2.62,1.66);
+  % contact with g
+  \fill (5.3965,2.81495) circle (1.6pt);
+  \draw[densely dashed] (4.45,2.81495) -- (6.35,2.81495);
+  \draw[densely dotted] (5.3965,2.81495) -- (5.3965,0) node[below] {$x_2$};
+  \node[align=center, fill=white, inner sep=1.5pt] (n2) at (7.25,3.25) {$u^\prime(x_2)=D_+g(x_2)=D^-g(x_2)$};
+  \draw[->, thin] (n2.west) to[bend right=20] (5.47,2.86);
+  % singular free point
+  \fill (8,{U(8.0001)}) circle (1.6pt);
+  \draw[densely dashed] (8,0.25) -- (8,1.6);
+  \draw[densely dotted] (8,0.25) -- (8,0) node[below] {$x_3$};
+  \node[align=left, anchor=west] at (8.12,1.75) {$u^\prime(x_3)=-\infty$\\(free point)};
+  % chord illustrating strict differentiability
+  \draw[thick, blue!60!black] (1.85,{U(1.85)}) -- (3.2,{U(3.2)});
+  \fill[blue!60!black] (1.85,{U(1.85)}) circle (1.2pt) node[above] {$s$} (3.2,{U(3.2)}) circle (1.2pt) node[above] {$t$};
+  \node[blue!60!black, align=center, fill=white, inner sep=1.5pt] (nk) at (1.25,0.95) {$k_u(s,t)\to u^\prime(x_1)$\\ as $s,t\to x_1$};
+  \draw[->, thin, blue!60!black] (nk.north) to[bend left=15] (2.2,{(U(1.85)+U(3.2))/2-0.05});
+\end{tikzpicture}
+\caption{Theorem \ref{T-main}. Away from the contact points, the obstacles may have corners or vertical cusps, where no derivative exists, even infinite; Corollary \ref{C-sychev} (Figure \ref{Fig-sychev}) excludes them. The derivative $u^\prime$ exists everywhere in $[-\infty,\infty]$ and is continuous; at $x_1$ and $x_2$ it is given by the obstacle (assertion (i)); it may be infinite, e.g. at a free point $x_3$, but only on a closed null set. Chord slopes near $x_0$ converge to $u^\prime(x_0)$ (assertion (ii)).}\label{Fig-main}
+\end{figure}
+
+\begin{corollary}[Sychev's conjecture for finite energy solutions]\label{C-sychev}
+Assume that \ref{HypH1} and \ref{HypH2} hold, and that $f$ and $g$ have a derivative in $[-\infty,\infty]$ at every point of $]a,b[$, which is the case if $f,g\in W^{1,1}_{\rm T}([a,b])$. Then the following two assertions hold.
+\begin{enumerate}[leftmargin=3em, itemsep=0.8em, topsep=0.5em]
+\item[{\rm(i)}] Every $u\in\Sol$ with $\J(u;[a,b])<\infty$ has Tonelli's partial regularity, and
+\begin{align*}
+&u^\prime=f^\prime\hbox{ on }\{u=f\}\cap]a,b[;\\
+&u^\prime=g^\prime\hbox{ on }\{u=g\}\cap]a,b[.
+\end{align*}
+\item[{\rm(ii)}] If $\inf_{\A}\J(\cdot;[a,b])<\infty$, then every $u\in\Sol$ has finite energy, so that {\rm(i)} applies to all solutions.
+\end{enumerate}
+\end{corollary}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[x=1.3cm, y=0.85cm, font=\scriptsize,
+  declare function={C(\t)=((\t<0) ? -1 : 1)*abs(\t)^(1/3);
+    F(\t)=2.1+0.8*C(\t-3)-0.07*(\t-3)^2;
+    UL(\t)=2.1-0.5*abs(\t-3)^(1/3);
+    UR(\t)=2.1+1.1*abs(\t-3)^(1/3)-0.06*(\t-3)^2;
+    G(\t)=4.2461-exp(-((\t-4.9546)/0.8)^2);}]
+  \draw[->, gray] (-0.2,0) -- (10.3,0) node[right] {$x$};
+  \draw[gray] (0,0.05) -- (0,-0.05) node[below, black] {$a$};
+  \draw[gray] (10,0.05) -- (10,-0.05) node[below, black] {$b$};
+  % obstacles
+  \draw[thick, gray, domain=0:2.999, samples=120] plot (\x, {F(\x)});
+  \draw[thick, gray, domain=3.001:10, samples=120] plot (\x, {F(\x)}) node[right, black] {$f$};
+  \draw[thick, gray] (2.999,{F(2.999)}) -- (3.001,{F(3.001)});
+  \draw[thick, gray, domain=0:10, samples=150, smooth] plot (\x, {G(\x)}) node[right, black] {$g$};
+  % solution
+  \draw[very thick, red!60!black, domain=0:2.999, samples=120] plot (\x, {UL(\x)});
+  \draw[very thick, red!60!black, domain=3.001:10, samples=150] plot (\x, {UR(\x)}) node[right] {$u$};
+  \draw[very thick, red!60!black] (2.999,{UL(2.999)}) -- (3.001,{UR(3.001)});
+  % contact with f: vertical tangent
+  \fill (3,2.1) circle (1.6pt);
+  \draw[densely dashed] (3,1.1) -- (3,3.1);
+  \draw[densely dotted] (3,1.1) -- (3,0) node[below] {$x_1$};
+  \node[align=center, fill=white, inner sep=1.5pt] (n1) at (1.2,3.5) {$u^\prime(x_1)=f^\prime(x_1)=+\infty$};
+  \draw[->, thin] (n1.south east) to[bend left=15] (2.95,2.2);
+  % contact with g
+  \fill (4.9546,3.2461) circle (1.6pt);
+  \draw[densely dashed] (4.0,3.2461) -- (5.9,3.2461);
+  \draw[densely dotted] (4.9546,3.2461) -- (4.9546,0) node[below] {$x_2$};
+  \node[align=center, fill=white, inner sep=1.5pt] (n2) at (7.4,3.75) {$u^\prime(x_2)=g^\prime(x_2)$};
+  \draw[->, thin] (n2.west) to[bend right=20] (5.03,3.3);
+\end{tikzpicture}
+\caption{Corollary \ref{C-sychev}. The obstacles have a derivative in $[-\infty,\infty]$ at every point, possibly infinite. At a contact point, the derivative of the solution is that of the obstacle, even when it is infinite: at $x_1$, both $f$ and $u$ have a vertical tangent.}\label{Fig-sychev}
+\end{figure}
+
+\begin{proof}[\bf Proof of Corollary \ref{C-sychev}]
+We first check \Of\ and \Og. Let $x\in]a,b[$. Since $f$ has a derivative $f^\prime(x)\in[-\infty,\infty]$,
+\begin{equation*}
+\lim_{t\to0^+}k_f(x,x+t)=\lim_{t\to0^+}k_f(x-t,x)=f^\prime(x),
+\end{equation*}
+so that the four Dini derivates of $f$ at $x$ are equal to $f^\prime(x)$:
+\begin{equation*}
+D^+f(x)=D_+f(x)=D^-f(x)=D_-f(x)=f^\prime(x).
+\end{equation*}
+In particular, \Of\ holds with equality. The same holds for $g$ and \Og. Moreover, a function in $W^{1,1}_{\rm T}([a,b])$ has a derivative in $[-\infty,\infty]$ at every point, which gives the particular case $f,g\in W^{1,1}_{\rm T}([a,b])$.
+
+\medskip
+
+{\bf Proof of (i).} By Theorem \ref{T-main}, every $u\in\Sol$ with $\J(u;[a,b])<\infty$ has Tonelli's partial regularity, and its assertion (i) reads
+\begin{align*}
+&u^\prime=f^\prime\hbox{ on }\{u=f\}\cap]a,b[;\\
+&u^\prime=g^\prime\hbox{ on }\{u=g\}\cap]a,b[.
+\end{align*}
+
+\medskip
+
+{\bf Proof of (ii).} If $\inf_{\A}\J(\cdot;[a,b])<\infty$ and $u\in\Sol$, then
+\begin{equation*}
+\J(u;[a,b])=\inf_{\A}\J(\cdot;[a,b])<\infty,
+\end{equation*}
+so that {\rm(i)} applies to all solutions.
+\end{proof}
+
+\begin{corollary}[$C^1$-regularity near the contact points]\label{C-C1}
+Assume that \ref{HypH1} and \ref{HypH2} hold, and that $f$ and $g$ are differentiable on $]a,b[$ with finite derivatives, which is the case if $f,g\in C^1([a,b])$. Then every $u\in\Sol$ with $\J(u;[a,b])<\infty$ has Tonelli's partial regularity, and the following two assertions hold.
+\begin{enumerate}[leftmargin=3em, itemsep=0.8em, topsep=0.5em]
+\item[{\rm(i)}] $u$ is of class $C^1$ in a neighbourhood of every contact point in $]a,b[$.
+\item[{\rm(ii)}] The singular set of $u$ is closed and contains no contact point in $]a,b[$, i.e.
+\begin{equation*}
+\{u^\prime=\pm\infty\}\subset\{a,b\}\cup\{f<u<g\}.
+\end{equation*}
+\end{enumerate}
+No condition on the moduli of continuity of $f$, $g$, $f^\prime$ and $g^\prime$ is needed.
+\end{corollary}
+
+\begin{figure}[H]
+\centering
+\scalebox{0.8}{\begin{tikzpicture}[x=1.3cm, y=0.95cm, font=\scriptsize,
+  declare function={S(\t)=-0.45*((\t<8) ? -1 : 1)*abs(\t-8)^(1/3);
+    U(\t)=1.5+0.7*sin(deg(pi*(\t-4)/3))+S(\t);
+    F(\t)=0.2+(1.5928-0.2)*exp(-((\t-2.5633)/0.6)^2);
+    G(\t)=3.815-exp(-((\t-5.3965)/0.7)^2);}]
+  % C^1 neighbourhoods of the contact points
+  \fill[green!12] (1.8,0) rectangle (3.35,4.35);
+  \fill[green!12] (4.6,0) rectangle (6.2,4.35);
+  \node[green!40!black] at (2.575,4.12) {$u$ of class $C^1$};
+  \node[green!40!black] at (5.4,4.12) {$u$ of class $C^1$};
+  % axis and endpoints
+  \draw[->, gray] (0.3,0) -- (10.1,0) node[right] {$x$};
+  \draw[gray] (0.5,0.05) -- (0.5,-0.05) node[below, black] {$a$};
+  \draw[gray] (9.8,0.05) -- (9.8,-0.05) node[below, black] {$b$};
+  % obstacles
+  \draw[thick, gray, domain=0.5:9.8, samples=150, smooth] plot (\x, {F(\x)}) node[right, black] {$f$};
+  \draw[thick, gray, domain=0.5:9.8, samples=150, smooth] plot (\x, {G(\x)}) node[right, black] {$g$};
+  % solution
+  \draw[very thick, red!60!black, domain=0.5:7.995, samples=200, smooth] plot (\x, {U(\x)});
+  \draw[very thick, red!60!black, domain=8.005:9.8, samples=100, smooth] plot (\x, {U(\x)}) node[right] {$u$};
+  \draw[very thick, red!60!black] (7.995,{U(7.995)}) -- (8.005,{U(8.005)});
+  % contact points
+  \fill (2.5633,1.5928) circle (1.6pt);
+  \draw[densely dashed] (1.9,{1.5928}) -- (3.25,{1.5928});
+  \draw[densely dotted] (2.5633,1.5928) -- (2.5633,0) node[below] {$x_1$};
+  \node[fill=green!12, inner sep=1pt] at (2.5633,2.55) {$u^\prime(x_1)=f^\prime(x_1)\in\RR$};
+  \fill (5.3965,2.81495) circle (1.6pt);
+  \draw[densely dashed] (4.7,2.81495) -- (6.1,2.81495);
+  \draw[densely dotted] (5.3965,2.81495) -- (5.3965,0) node[below] {$x_2$};
+  \node[fill=green!12, inner sep=1pt] at (5.3965,1.6) {$u^\prime(x_2)=g^\prime(x_2)\in\RR$};
+  % singular free point
+  \fill (8,{U(8.0001)}) circle (1.6pt);
+  \draw[densely dashed] (8,0.25) -- (8,1.6);
+  \draw[densely dotted] (8,0.25) -- (8,0) node[below] {$x_3$};
+  \node[align=left, anchor=west] at (8.12,1.75) {$u^\prime(x_3)=-\infty$\\(free point)};
+\end{tikzpicture}}
+\caption{Corollary \ref{C-C1}. The obstacles are differentiable with finite derivatives. Near each contact point, $u$ is of class $C^1$ (shaded). The derivative of $u$ can be infinite only at free points, such as $x_3$, or at $a$ and $b$.}\label{Fig-C1}
+\end{figure}
+
+\begin{proof}[\bf Proof of Corollary \ref{C-C1}]
+A finite derivative is a derivative in $[-\infty,\infty]$, so Corollary \ref{C-sychev}(i) applies: $u$ has Tonelli's partial regularity, and
+\begin{align*}
+&u^\prime=f^\prime\hbox{ on }\{u=f\}\cap]a,b[;\\
+&u^\prime=g^\prime\hbox{ on }\{u=g\}\cap]a,b[.
+\end{align*}
+
+\medskip
+
+{\bf Proof of (i).} Let $x_0\in]a,b[$ be a contact point, say $u(x_0)=f(x_0)$, the case $u(x_0)=g(x_0)$ being similar. Then $u^\prime(x_0)=f^\prime(x_0)\in\RR$. Since $u^\prime:[a,b]\to[-\infty,\infty]$ is continuous and $\RR$ is open in $[-\infty,\infty]$, the derivative $u^\prime$ is finite and continuous near $x_0$, i.e. $u$ is of class $C^1$ near $x_0$.
+
+\medskip
+
+{\bf Proof of (ii).} By (i), no contact point in $]a,b[$ is singular, so that
+\begin{equation*}
+\{u^\prime=\pm\infty\}\subset\{a,b\}\cup\{f<u<g\}.
+\end{equation*}
+This set is closed, as the preimage of the closed set $\{-\infty,+\infty\}$ by the continuous map $u^\prime$.
+\end{proof}
+
+\begin{remark}[Comparison with the results of \cite{mandallena18}]\label{Remark-Man18}
+Corollary \ref{C-C1} contains the regularity results of \cite[Theorem 2.8 and Corollary 2.9]{mandallena18}. There, $L$ is locally H\"older continuous in all its variables, the obstacles are of class $C^1$ and satisfy the Dini-type condition \cite[(1.2)]{mandallena18} (in particular for $C^{1,\sigma}$ obstacles), and every solution is shown to have Tonelli's partial regularity. Here, neither the H\"older continuity in $v$ nor any condition on the moduli of continuity of $f$, $g$, $f^\prime$ and $g^\prime$ is needed. Moreover, for $C^1$ obstacles, every solution has finite energy as soon as $\A\neq\emptyset$, since $\A$ then contains a Lipschitz function. Note that \cite[Theorem 1.2]{gratwick-sychev19} covers $C^{1,\sigma}$ obstacles under a weaker, singular ellipticity condition, but, as in \cite{mandallena18}, requires the H\"older continuity of $L$ in all its variables.
+\end{remark}
+
+\begin{remark}[Comments on the assumptions]\label{Remark-on-results}
+\begin{enumerate}[leftmargin=2em, itemsep=1em, topsep=0.6em]
+\item[(a)] {\sf Convex and semiconvex obstacles.} The conditions \Of\ and \Og\ hold in the following cases:
+\begin{align*}
+&f\hbox{ convex, or semiconvex, near }\{u=f\}\ \Longrightarrow\ \hbox{\Of};\\
+&g\hbox{ concave, or semiconcave, near }\{u=g\}\ \Longrightarrow\ \hbox{\Og}.
+\end{align*}
+
+\smallskip
+$\scriptstyle\bullet$ {\em Convex case.} If $f$ is convex near $x$, its one-sided derivatives exist and are finite, and
+\begin{equation*}
+D_-f(x)=f^\prime_-(x)\leq f^\prime_+(x)=D^+f(x).
+\end{equation*}
+
+\smallskip
+$\scriptstyle\bullet$ {\em Semiconvex case.} Then $f+\frac c2x^2$ is convex for some $c\geq0$. Subtracting the $C^1$ function $\frac c2x^2$ shifts the four Dini derivates at $x$ by the same number $-cx$, so the inequality is preserved.
+
+\smallskip
+$\scriptstyle\bullet$ {\em Concave and semiconcave cases.} If $g$ is concave, or semiconcave, then $-g$ is convex, or semiconvex, and the above gives
+\begin{align*}
+D_-(-g)\leq D^+(-g)&\iff -D^-g\leq-D_+g\\
+&\iff D_+g\leq D^-g,
+\end{align*}
+which is \Og.
+
+\item[(b)] {\sf The conditions \Of\ and \Og\ cannot be dropped} (Figure \ref{Fig-examples}, left and middle). Let
+\begin{align*}
+&L(x,w,v)=v^2\hbox{ on }[a,b]=[-1,1];\\
+&f(x)=-|x|,\ g\equiv1;\\
+&A=B=-1.
+\end{align*}
+
+\smallskip
+$\scriptstyle\bullet$ {\em The unique solution is $f$.} Let $v\in\A$. Then $v(-1)=v(1)=-1$ and $v(0)\geq f(0)=0$. By the Cauchy--Schwarz inequality,
+\begin{align*}
+&\int_{-1}^0(v^\prime)^2dx\geq\Big(\int_{-1}^0v^\prime dx\Big)^2=(v(0)+1)^2\geq1;\\
+&\int_0^1(v^\prime)^2dx\geq\Big(\int_0^1v^\prime dx\Big)^2=(v(0)+1)^2\geq1.
+\end{align*}
+Hence $\J(v;[-1,1])\geq2=\J(f;[-1,1])$. Equality holds if and only if $v(0)=0$ and $v^\prime$ is constant on $]-1,0[$ and on $]0,1[$, i.e. if and only if $v=f$.
+
+\smallskip
+$\scriptstyle\bullet$ {\em It has a corner at the contact point.} At $0$,
+\begin{equation*}
+D_-f(0)=1>-1=D^+f(0),
+\end{equation*}
+so that \Of\ fails (``concave corner''), and $u=f$ is not differentiable at $0$.
+
+\smallskip
+$\scriptstyle\bullet$ {\em The upper obstacle.} By symmetry, the condition \Og\ cannot be dropped either. Take the same $L$ on $[-1,1]$, with
+\begin{align*}
+&f\equiv-1,\ g(x)=|x|;\\
+&A=B=1.
+\end{align*}
+The unique solution is $u=g$, and $D_+g(0)=1>-1=D^-g(0)$: \Og\ fails (``convex corner'').
+
+
+\item[(c)] {\sf The finite energy assumption cannot be dropped} (Figure \ref{Fig-examples}, right). Let
+\begin{align*}
+&f(x):=(x-a)^{1/3},\ g:=f+1;\\
+&A:=0,\ B:=f(b).
+\end{align*}
+
+\smallskip
+$\scriptstyle\bullet$ {\em Every admissible function is a solution.} Let $v\in\A$ and assume that $v^\prime\in L^2([a,b])$. Since $v\geq f$ and $v(a)=f(a)$, the Cauchy--Schwarz inequality gives, for $x$ near $a$,
+\begin{equation*}
+(x-a)^{1/3}=f(x)-f(a)\leq v(x)-v(a)\leq\|v^\prime\|_{L^2}\sqrt{x-a}.
+\end{equation*}
+Hence $(x-a)^{-1/6}\leq\|v^\prime\|_{L^2}$ for all $x$ near $a$, which is impossible. So $v^\prime\notin L^2([a,b])$, and $\J(v;[a,b])=\infty$ by Lemma \ref{L-apriori} below, see \eqref{Lower-bound-L}. Every admissible function has infinite energy, so that $\Sol=\A$.
+
+\smallskip
+$\scriptstyle\bullet$ {\em A solution without Tonelli's partial regularity.} Fix $c\in]a,b[$ and $\phi\in C^\infty_c(]a,b[)$ with $0\leq\phi\leq1$ and $\phi=1$ near $c$. Set $v:=f+\lambda w$, where
+\begin{equation*}
+w(x):=\phi(x)(x-c)^2\Big(2+\sin\frac{1}{x-c}\Big)\hbox{ for }x\neq c,\qquad w(c):=0,
+\end{equation*}
+and $\lambda>0$ is so small that $0\leq\lambda w<1$. Then $v$ is absolutely continuous, $v(a)=A$, $v(b)=B$ and $f\leq v<g$, so that $v\in\A=\Sol$. Near $c$, $f$ is smooth and
+\begin{equation*}
+w^\prime(x)=2(x-c)\Big(2+\sin\frac1{x-c}\Big)-\cos\frac1{x-c}\hbox{ for }x\neq c,\qquad w^\prime(c)=0.
+\end{equation*}
+So $v^\prime$ exists and is finite near $c$, but is not continuous at $c$: $v\notin W^{1,1}_{\rm T}([a,b])$.
+
+\smallskip
+$\scriptstyle\bullet$ {\em Conclusion.} Since $f,g\in W^{1,1}_{\rm T}([a,b])$, with $f^\prime(a)=g^\prime(a)=+\infty$, Sychev's conjecture fails without the finite energy assumption. However, as soon as $\inf_{\A}\J(\cdot;[a,b])<\infty$, every $u\in\Sol$ has finite energy (Corollary \ref{C-sychev}(ii)), and Theorem \ref{T-main} and its corollaries apply to {\em all} solutions.
+
+\item[(d)] {\sf Regularity of the obstacles.} Apart from \Of\ and \Og\ at the contact points, the obstacles are only assumed to be continuous. Elsewhere, they may have corners or vertical cusps (Figure \ref{Fig-main}).
+\end{enumerate}
+\end{remark}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[font=\footnotesize]
+% (b) concave corner of f
+\begin{scope}[x=1.1cm, y=0.8cm]
+  \draw[->, gray] (-1.15,0) -- (1.2,0) node[right] {$x$};
+  \draw[->, gray] (0,-1.15) -- (0,1.25);
+  \draw[thick, dashed] (-1,1) -- (1,1) node[right] {$g\equiv1$};
+  \draw[very thick, red!60!black] (-1,-1) -- (0,0) -- (1,-1);
+  \node[red!60!black, fill=white, inner sep=1pt] at (0,-0.7) {$u=f$};
+  \fill (-1,-1) circle (1.4pt) node[left] {$-1$};
+  \fill (1,-1) circle (1.4pt) node[right] {$1$};
+  \fill[red!60!black] (0,0) circle (1.6pt);
+  \node[align=center] at (0,-1.75) {$D_-f(0)>D^+f(0)$};
+\end{scope}
+% (b) convex corner of g
+\begin{scope}[shift={(4.0,0)}, x=1.1cm, y=0.8cm]
+  \draw[->, gray] (-1.15,0) -- (1.2,0) node[right] {$x$};
+  \draw[->, gray] (0,-1.15) -- (0,1.25);
+  \draw[thick, dashed] (-1,-1) -- (1,-1) node[right] {$f\equiv-1$};
+  \draw[very thick, red!60!black] (-1,1) -- (0,0) -- (1,1);
+  \node[red!60!black, fill=white, inner sep=1pt] at (0,0.7) {$u=g$};
+  \fill (-1,1) circle (1.4pt) node[above] {$-1$};
+  \fill (1,1) circle (1.4pt) node[above] {$1$};
+  \fill[red!60!black] (0,0) circle (1.6pt);
+  \node[align=center] at (0,-1.75) {$D_+g(0)>D^-g(0)$};
+\end{scope}
+% (c) infinite energy
+\begin{scope}[shift={(7.4,-0.95)}, x=4.6cm, y=0.9cm,
+  declare function={F(\t)=\t^(1/3); W(\t)=4.5*exp(1-1/(1-((\t-0.55)/0.25)^2))*(\t-0.55)^2*(2+sin(deg(1/(\t-0.55))));}]
+  \draw[->, gray] (0,0) -- (1.08,0) node[right] {$x$};
+  \draw[->, gray] (0,0) -- (0,2.25);
+  \draw[thick, domain=0:1, samples=200, smooth] plot (\x, {F(\x)}) node[right] {$f$};
+  \draw[thick, dashed, domain=0:1, samples=200, smooth] plot (\x, {F(\x)+1}) node[right] {$g=f+1$};
+  \draw[very thick, red!60!black, domain=0:0.301, samples=80] plot (\x, {F(\x)});
+  \draw[very thick, red!60!black, domain=0.301:0.53, samples=300] plot (\x, {F(\x)+W(\x)});
+  \draw[very thick, red!60!black] (0.53,{F(0.53)+W(0.53)}) -- (0.57,{F(0.57)+W(0.57)});
+  \draw[very thick, red!60!black, domain=0.57:0.799, samples=300] plot (\x, {F(\x)+W(\x)});
+  \draw[very thick, red!60!black, domain=0.799:1, samples=60] plot (\x, {F(\x)});
+  \node[red!60!black] at (0.72,1.12) {$v$};
+  \draw[densely dotted] (0.55,0) node[below] {$c$} -- (0.55,{F(0.55)});
+  \node[below] at (0,0) {$a$};
+  \node[below] at (1,0) {$b$};
+\end{scope}
+\end{tikzpicture}
+\caption{Left and middle: Remark \ref{Remark-on-results}(b). A concave corner of $f$, or a convex corner of $g$, at a contact point gives a corner of the solution. Right: Remark \ref{Remark-on-results}(c). Every admissible function has infinite energy, hence is a solution, including $v=f+\lambda w$, whose derivative is not continuous at $c$ ($\lambda$ exaggerated).}\label{Fig-examples}
+\end{figure}
+
+
+
+
+\FloatBarrier
+
+\section{\textsc{\textsf{Preliminaries}}}\label{Sect-Preliminaries}
+
+Throughout Sections \ref{Sect-Preliminaries}--\ref{Sect-Proof-Main}, we assume that \ref{HypH1} and \ref{HypH2} hold, and we fix $u\in\Sol$ with $\J(u;[a,b])<\infty$. We write $k(s,t):=k_u(s,t)$. All the functions that we compare with $u$ take their values between $\min_{[a,b]}f$ and $\max_{[a,b]}g$, so that we work on the compact set
+\begin{equation*}
+Q:=[a,b]\times\left[\min_{[a,b]}f,\max_{[a,b]}g\right].
+\end{equation*}
+Indeed, since $f\leq u\leq g$ on $[a,b]$, we have
+\begin{equation*}
+\min_{[a,b]}f\leq u(x)\leq\max_{[a,b]}g\hbox{ for all }x\in[a,b],
+\end{equation*}
+i.e. the graph of $u$ lies in $Q$. Now let $a\leq s<t\leq b$. On $[s,t]$, the function $u_{s,t}$ is affine, so that its values lie between $u(s)$ and $u(t)$, hence in $[\min_{[a,b]}f,\max_{[a,b]}g]$. Outside $[s,t]$, it is equal to $u$. Thus the graph of $u_{s,t}$ lies in $Q$ too.
+
+\subsection{A priori bounds} The ellipticity condition \ref{HypH2} makes $L$ grow quadratically in $v$, uniformly on $Q$ (see \eqref{Lower-bound-L}). This gives an $L^2$ bound on $u^\prime$ (see \eqref{N}), hence the H\"older continuity of $u$ (see \eqref{Holder-u}). Let
+\begin{equation*}
+C_0:=\max_{Q}\max\big\{|L(\cdot,\cdot,0)|,|L_v(\cdot,\cdot,0)|\big\}.
+\end{equation*}
+
+\begin{lemma}[A priori bounds]\label{L-apriori}
+For every $(x,w)\in Q$ and every $v\in\RR$,
+\begin{equation}\label{Lower-bound-L}
+L(x,w,v)\geq L(x,w,0)+L_v(x,w,0)v+\frac\mu2v^2\geq\frac\mu4v^2-C_0-\frac{C_0^2}{\mu}.
+\end{equation}
+Consequently,
+\begin{equation}\label{N}
+\|u^\prime\|_{L^2([a,b])}\leq N:=\left[\frac4\mu\left(\J(u;[a,b])+\Big(C_0+\frac{C_0^2}{\mu}\Big)(b-a)\right)\right]^{1/2}<\infty,
+\end{equation}
+and
+\begin{equation}\label{Holder-u}
+|u(x)-u(y)|\leq N\sqrt{|x-y|}\hbox{ for all }x,y\in[a,b].
+\end{equation}
+\end{lemma}
+
+\begin{proof}[\bf Proof of Lemma \ref{L-apriori}]
+Taylor's formula in $v$ at $v=0$ gives
+\begin{equation*}
+L(x,w,v)=L(x,w,0)+L_v(x,w,0)v+\frac12L_{vv}(x,w,\xi)v^2
+\end{equation*}
+for some $\xi$, and $L_{vv}\geq\mu$ by \ref{HypH2}: this is the first inequality in \eqref{Lower-bound-L}. Moreover, $L(x,w,0)\geq-C_0$ and, by Young's inequality,
+\begin{equation*}
+L_v(x,w,0)v\geq-C_0|v|\geq-\frac\mu4v^2-\frac{C_0^2}\mu,
+\end{equation*}
+which gives the second one. Taking $(x,w,v)=(x,u(x),u^\prime(x))$ in \eqref{Lower-bound-L} and integrating over $[a,b]$, we get
+\begin{equation*}
+\frac\mu4\int_a^b(u^\prime)^2dx\leq\J(u;[a,b])+\Big(C_0+\frac{C_0^2}\mu\Big)(b-a),
+\end{equation*}
+that is, \eqref{N}. Finally, for $x<y$ in $[a,b]$, the Cauchy--Schwarz inequality gives
+\begin{equation*}
+|u(y)-u(x)|=\left|\int_x^yu^\prime dt\right|\leq\sqrt{y-x}\,\|u^\prime\|_{L^2([a,b])}\leq N\sqrt{y-x},
+\end{equation*}
+which is \eqref{Holder-u}.
+\end{proof}
+
+\subsection{Good intervals} The only competitors that we use are obtained by replacing $u$ by one of its chords. This leads to the following definition.
+
+\begin{definition}\label{Def-good}
+An interval $[\sigma,\tau]\subset[a,b]$ with $\sigma<\tau$ is {\em good} if $u_{\sigma,\tau}\in\A$.
+\end{definition}
+
+\begin{remark}\label{Remark-good}
+Since $u_{\sigma,\tau}$ is absolutely continuous and equal to $u$ outside $]\sigma,\tau[$, it has the boundary values $A$ and $B$, and it lies between $f$ and $g$ outside $[\sigma,\tau]$. Hence $[\sigma,\tau]$ is good if and only if
+\begin{equation*}
+f\leq u_{\sigma,\tau}\leq g\hbox{ on }[\sigma,\tau],
+\end{equation*}
+i.e. the chord of $u$ on $[\sigma,\tau]$ does not cross the obstacles (Figure \ref{Fig-good}).
+\end{remark}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[font=\footnotesize]
+% left: good interval
+\begin{scope}[x=1.35cm, y=1.1cm, declare function={U(\t)=1.3+0.5*sin(deg(1.5*\t)); F(\t)=0.45+0.15*sin(deg(1.3*\t)); G(\t)=2.75+0.1*cos(deg(\t));}]
+  \draw[->, gray] (-0.1,0) -- (4.2,0) node[right] {$x$};
+  \draw[thick, gray, domain=0:4, samples=80, smooth] plot (\x,{F(\x)}) node[right, black] {$f$};
+  \draw[thick, gray, domain=0:4, samples=80, smooth] plot (\x,{G(\x)}) node[right, black] {$g$};
+  \draw[very thick, red!60!black, domain=0:0.8, samples=30, smooth] plot (\x,{U(\x)});
+  \draw[very thick, red!60!black, domain=3.2:4, samples=30, smooth] plot (\x,{U(\x)}) node[right] {$u$};
+  \draw[thick, red!60!black, densely dashed, domain=0.8:3.2, samples=60, smooth] plot (\x,{U(\x)});
+  \draw[very thick, blue!60!black] (0.8,{U(0.8)}) -- (3.2,{U(3.2)});
+  \node[blue!60!black, above right] at (1.9,{(U(0.8)+U(3.2))/2+0.05}) {$u_{\sigma,\tau}$};
+  \draw[densely dotted] (0.8,{U(0.8)}) -- (0.8,0) node[below] {$\sigma$};
+  \draw[densely dotted] (3.2,{U(3.2)}) -- (3.2,0) node[below] {$\tau$};
+  \node at (2,-0.75) {$[\sigma,\tau]$ is good};
+\end{scope}
+% right: not good
+\begin{scope}[shift={(7.2,0)}, x=1.35cm, y=1.1cm, declare function={V(\t)=0.9+0.25*(\t-2)^2; F(\t)=0.35+0.1*sin(deg(\t)); G(\t)=2.6-1.3*exp(-((\t-2)/0.35)^2);}]
+  \draw[->, gray] (-0.1,0) -- (4.2,0) node[right] {$x$};
+  \draw[thick, gray, domain=0:4, samples=80, smooth] plot (\x,{F(\x)}) node[right, black] {$f$};
+  \draw[thick, gray, domain=0:4, samples=120, smooth] plot (\x,{G(\x)}) node[right, black] {$g$};
+  \draw[very thick, red!60!black, domain=0:0.5, samples=30, smooth] plot (\x,{V(\x)});
+  \draw[very thick, red!60!black, domain=3.5:4, samples=30, smooth] plot (\x,{V(\x)}) node[right] {$u$};
+  \draw[thick, red!60!black, densely dashed, domain=0.5:3.5, samples=60, smooth] plot (\x,{V(\x)});
+  \draw[very thick, blue!60!black] (0.5,{V(0.5)}) -- (3.5,{V(3.5)});
+  \node[blue!60!black, above] at (0.95,{V(0.5)}) {$u_{\sigma,\tau}$};
+  \draw[red, thick] (2,{V(0.5)}) circle (0.22);
+  \draw[densely dotted] (0.5,{V(0.5)}) -- (0.5,0) node[below] {$\sigma$};
+  \draw[densely dotted] (3.5,{V(3.5)}) -- (3.5,0) node[below] {$\tau$};
+  \node at (2,-0.75) {$[\sigma,\tau]$ is not good};
+\end{scope}
+\end{tikzpicture}
+\caption{Definition \ref{Def-good}. The competitor $u_{\sigma,\tau}$ is equal to the chord of $u$ on $[\sigma,\tau]$ (solid blue) and to $u$ elsewhere; on $[\sigma,\tau]$, it replaces the dashed part of $u$. Left: it lies between $f$ and $g$, so that $[\sigma,\tau]$ is good. Right: the chord passes above $g$ (circled), so that $[\sigma,\tau]$ is not good.}\label{Fig-good}
+\end{figure}
+
+\medskip
+
+On a good interval, the minimality of $u$ can be localized. By minimality,
+\begin{equation*}
+\J(u;[a,b])\leq\J(u_{\sigma,\tau};[a,b]).
+\end{equation*} Since $L(\cdot,u,u^\prime)$ is bounded from below by Lemma \ref{L-apriori} and $\J(u;[a,b])<\infty$, the energy $\J(u;I)$ is finite for every interval $I\subset[a,b]$. Moreover, $(x,u_{\sigma,\tau}(x),k(\sigma,\tau))$ stays in a compact set, so that the integrand of the competitor is bounded on $[\sigma,\tau]$. As $u$ and $u_{\sigma,\tau}$ coincide outside $[\sigma,\tau]$, we may subtract $\J(u;[a,b]\setminus[\sigma,\tau])$ from both sides, and we get
+\begin{equation}\label{good}
+\int_\sigma^\tau L(x,u(x),u^\prime(x))dx\leq\int_\sigma^\tau L\big(x,u_{\sigma,\tau}(x),k(\sigma,\tau)\big)dx.
+\end{equation}
+
+\medskip
+
+We work at scales at most $\rho_1$, where $\rho_1\in]0,1]$ is fixed such that $(1+N)\sqrt{\rho_1}\leq1$, for instance $\rho_1:=(1+N)^{-2}$. For $\eps\in]0,\rho_1]$, we then have $\eps\leq\sqrt\eps$, and so
+\begin{equation}\label{rho1}
+\eps+N\sqrt\eps\leq(1+N)\sqrt\eps\leq1.
+\end{equation}
+At these scales, the basic estimate says that, on a good interval, $u^\prime$ is close in mean square to the slope of the chord.
+
+\begin{lemma}[Basic estimate on good intervals]\label{L-good}
+For every $K\geq0$ there exist $C(K)>0$ and $\gamma(K)\in]0,\frac14]$ such that, for every good interval $[\sigma,\tau]$ with
+\begin{equation*}
+\eps:=\tau-\sigma\leq\rho_1\quad\hbox{and}\quad|k(\sigma,\tau)|\leq K,
+\end{equation*}
+we have
+\begin{equation}\label{L2}
+\frac1\eps\int_\sigma^\tau|u^\prime(x)-k(\sigma,\tau)|^2dx\leq C(K)^2\eps^{2\gamma(K)}.
+\end{equation}
+\end{lemma}
+
+\begin{remark}
+The constants $C(K)$ and $\gamma(K)$ depend on $K$, on $L$, and on the fixed solution $u$ through $N$ and $Q$. They do not depend on the interval $[\sigma,\tau]$.
+\end{remark}
+
+\begin{proof}[\bf Proof of Lemma \ref{L-good}]
+Set $k_1:=k(\sigma,\tau)$, $u_1:=u(\sigma)$, $c:=u_{\sigma,\tau}$ and $\bar p:=L_v(\sigma,u_1,k_1)$. Let
+\begin{equation*}
+G_K:=Q\times[-(K+1),K+1],
+\end{equation*}
+which is compact, let $C>0$ and $\alpha\in]0,1]$ be given by \ref{HypH1} with $G=G_K$, and let $\Lambda:=\max_{G_K}L_{vv}$.
+
+\medskip
+
+{\bf Step 1: \boldmath$L_v$\unboldmath\  is H\"older continuous in \boldmath$(x,w)$\unboldmath.} Let $P,P^\prime\in Q$ with $d:=|P-P^\prime|\in]0,1]$, and let $|v|\leq K$. For $h\in]0,1]$, Taylor's formula gives $\xi,\xi^\prime\in]v,v+h[$ such that
+\begin{align*}
+L_v(P,v)&=\frac1h\big[L(P,v+h)-L(P,v)\big]-\frac h2L_{vv}(P,\xi);\\
+L_v(P^\prime,v)&=\frac1h\big[L(P^\prime,v+h)-L(P^\prime,v)\big]-\frac h2L_{vv}(P^\prime,\xi^\prime).
+\end{align*}
+Subtracting, we get
+\begin{align*}
+L_v(P,v)-L_v(P^\prime,v)={}&\frac{[L(P,v+h)-L(P^\prime,v+h)]-[L(P,v)-L(P^\prime,v)]}{h}\\
+&-\frac h2\big[L_{vv}(P,\xi)-L_{vv}(P^\prime,\xi^\prime)\big].
+\end{align*}
+The four points $(P,v+h)$, $(P^\prime,v+h)$, $(P,v)$ and $(P^\prime,v)$ belong to $G_K$, since $|v|+h\leq K+1$. So, by \ref{HypH1}, each bracket in the numerator is bounded by $Cd^\alpha$, and the first term by $\frac{2Cd^\alpha}h$. Since $0<\mu\leq L_{vv}\leq\Lambda$ on $G_K$, the second term is bounded by $h\Lambda$. Hence 
+\begin{equation*}
+|L_v(P,v)-L_v(P^\prime,v)|\leq\frac{2Cd^\alpha}{h}+h\Lambda,
+\end{equation*}
+and the choice $h:=d^{\alpha/2}\in]0,1]$ gives
+\begin{equation}\label{Lv}
+|L_v(P,v)-L_v(P^\prime,v)|\leq(2C+\Lambda)d^{\alpha/2}.
+\end{equation}
+
+\medskip
+
+{\bf Step 2: a pointwise inequality.} Since $\int_\sigma^\tau(u^\prime-k_1)dx=u(\tau)-u(\sigma)-k_1(\tau-\sigma)=0$ and $\bar p$ is a constant, \eqref{good} reads
+\begin{equation*}
+\int_\sigma^\tau F\,dx\leq0\quad\hbox{with}\quad F(x):=L(x,u(x),u^\prime(x))-L(x,c(x),k_1)-\bar p\,(u^\prime(x)-k_1).
+\end{equation*}
+Setting $\zeta(x):=u^\prime(x)-k_1$, we split $F=F_1+F_2+F_3$, where
+\begin{eqnarray*}
+F_1&:=&L(x,u,k_1+\zeta)-L(x,u,k_1)-L_v(x,u,k_1)\zeta;\\
+F_2&:=&\big[L_v(x,u(x),k_1)-L_v(\sigma,u_1,k_1)\big]\zeta;\\
+F_3&:=&L(x,u(x),k_1)-L(x,c(x),k_1).
+\end{eqnarray*}
+Indeed, since $u^\prime=k_1+\zeta$ and $\bar p=L_v(\sigma,u_1,k_1)$,
+\begin{align*}
+F_1+F_2+F_3&=\big[L(x,u,u^\prime)-L(x,u,k_1)-L_v(x,u,k_1)\zeta\big]+\big[L_v(x,u,k_1)\zeta-\bar p\,\zeta\big]\\
+&\quad+\big[L(x,u,k_1)-L(x,c,k_1)\big]\\
+&=L(x,u,u^\prime)-L(x,c,k_1)-\bar p\,\zeta=F.
+\end{align*}
+The first term is the main one. By Taylor's formula in $v$ at $k_1$, there is $\xi$ such that
+\begin{equation*}
+F_1=\frac12L_{vv}(x,u,\xi)\zeta^2\geq\frac\mu2\zeta^2.
+\end{equation*}
+Note that this uses $L_{vv}\geq\mu$ {\em everywhere}, since $\zeta$ is not bounded.
+
+\smallskip
+
+The two other terms are small, because $u$ stays close to $u_1$ and to $c$ on $[\sigma,\tau]$. Let $x\in[\sigma,\tau]$. By Lemma \ref{L-apriori}, see \eqref{Holder-u}, $|u(x)-u_1|\leq N\sqrt\eps$, and so, by \eqref{rho1},
+\begin{equation*}
+|x-\sigma|+|u(x)-u_1|\leq\eps+N\sqrt\eps\leq\min\big\{1,(1+N)\sqrt\eps\big\}.
+\end{equation*}
+Moreover, $|c(x)-u_1|=|k_1|(x-\sigma)\leq|u(\tau)-u(\sigma)|\leq N\sqrt\eps$, again by \eqref{Holder-u}, and hence
+\begin{equation*}
+|u(x)-c(x)|\leq|u(x)-u_1|+|u_1-c(x)|\leq2N\sqrt\eps.
+\end{equation*}
+The points $(x,u(x))$, $(\sigma,u_1)$ and $(x,c(x))$ lie in $Q$, and $|k_1|\leq K$, so that all the points involved belong to $G_K$. Applying \eqref{Lv} with $P=(x,u(x))$, $P^\prime=(\sigma,u_1)$, $v=k_1$ and $d\leq\min\{1,(1+N)\sqrt\eps\}$ (if $d=0$, then $F_2=0$), and then Young's inequality, we get
+\begin{equation*}
+|F_2|\leq\mathsf{A}|\zeta|\leq\frac\mu4\zeta^2+\frac{\mathsf{A}^2}{\mu}\quad\hbox{with}\quad\mathsf{A}:=(2C+\Lambda)\big((1+N)\sqrt\eps\big)^{\alpha/2}.
+\end{equation*}
+By \ref{HypH1} on $G_K$, with the points $(x,u(x),k_1)$ and $(x,c(x),k_1)$,
+\begin{equation*}
+|F_3|\leq C|u(x)-c(x)|^\alpha\leq\mathsf{B}:=C(2N\sqrt\eps)^\alpha.
+\end{equation*}
+Altogether, $\mathcal{L}^1$-a.e. in $[\sigma,\tau]$,
+\begin{equation*}
+F\geq\frac\mu2\zeta^2-\frac\mu4\zeta^2-\frac{\mathsf A^2}\mu-\mathsf B=\frac\mu4\zeta^2-\frac{\mathsf{A}^2}{\mu}-\mathsf{B}.
+\end{equation*}
+
+\medskip
+
+{\bf Step 3: end of the proof.} Integrating over $[\sigma,\tau]$, we obtain
+\begin{equation*}
+0\geq\int_\sigma^\tau F\,dx\geq\frac\mu4\int_\sigma^\tau\zeta^2dx-\left(\frac{\mathsf A^2}\mu+\mathsf B\right)\eps.
+\end{equation*}
+Since $0<\alpha\leq1$, $1+N\geq1$ and $1+2N\geq1$,
+\begin{align*}
+&\mathsf A^2=(2C+\Lambda)^2(1+N)^\alpha\eps^{\alpha/2}\leq(2C+\Lambda)^2(1+N)\eps^{\alpha/2};\\
+&\mathsf B=C(2N)^\alpha\eps^{\alpha/2}\leq C(1+2N)\eps^{\alpha/2}.
+\end{align*}
+Therefore
+\begin{equation*}
+\frac1\eps\int_\sigma^\tau|u^\prime-k_1|^2dx\leq C(K)^2\eps^{\alpha/2}\quad\hbox{with}\quad C(K)^2:=\frac4\mu\left[\frac{(2C+\Lambda)^2(1+N)}{\mu}+C(1+2N)\right],
+\end{equation*}
+and $\eps^{\alpha/2}=\eps^{2\gamma(K)}$ with $\gamma(K):=\frac\alpha4\in]0,\frac14]$. The constants $C$, $\alpha$ and $\Lambda$ only depend on $G_K$, i.e. on $K$ and $Q$.
+\end{proof}
+
+The mean deviation of $u^\prime$ from the slope of its chords is measured at each scale by two functions. For $K\geq0$ and $\eps\in]0,\rho_1]$, let
+\begin{equation}\label{Def-Theta}
+\Theta(K,\eps):=\sup\left\{\left(\frac1{\tau-\sigma}\int_\sigma^\tau|u^\prime-k(\sigma,\tau)|^2dx\right)^{1/2}:\begin{array}{l}[\sigma,\tau]\hbox{ good},\\ \tau-\sigma\leq\eps,\ |k(\sigma,\tau)|\leq K\end{array}\right\},
+\end{equation}
+with $\sup\emptyset:=0$, and, for $r\in]0,\rho_1]$, let
+\begin{equation*}
+E(K,r):=4\sum_{j=0}^\infty\Theta(K,2^{-j}r).
+\end{equation*}
+Sections \ref{Sect-Concavity} and \ref{Sect-Proof-Main} only use the following three properties of $\Theta$ and $E$.
+
+\begin{lemma}[Properties of $\Theta$ and $E$]\label{L-Theta}
+The following assertions hold.
+\begin{enumerate}[leftmargin=3em, itemsep=0.5em, topsep=0.5em]
+\item[{\rm(i)}] $\Theta$ and $E$ are nonnegative and nondecreasing with respect to both arguments.
+\item[{\rm(ii)}] $\Theta$ and $E$ tend to $0$ at small scales{\rm:} for every $K\geq0$,
+\begin{equation}\label{Theta}
+\Theta(K,\eps)\leq C(K)\eps^{\gamma(K)}\quad\hbox{and}\quad E(K,r)\leq\frac{4C(K)}{1-2^{-\gamma(K)}}r^{\gamma(K)}\xrightarrow[r\to0]{}0.
+\end{equation}
+\item[{\rm(iii)}] For every good interval $[\sigma,\tau]$ with $\tau-\sigma\leq\rho_1$ and all $\sigma\leq s<t\leq\tau$,
+\begin{equation}\label{CS}
+\big|u(t)-u(s)-k(\sigma,\tau)(t-s)\big|\leq\Theta\big(|k(\sigma,\tau)|,\tau-\sigma\big)\sqrt{(\tau-\sigma)(t-s)}.
+\end{equation}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}[\bf Proof of Lemma \ref{L-Theta}]
+{\bf Proof of (i).} The quantities in the supremum are nonnegative and $\sup\emptyset=0$, so that $\Theta\geq0$ and $E\geq0$. Moreover, increasing $K$ or $\eps$ enlarges the family of good intervals in the supremum.
+
+\medskip
+
+{\bf Proof of (ii).} By Lemma \ref{L-good}, a good interval of length $\eps^\prime\leq\eps\leq\rho_1$ with $|k(\sigma,\tau)|\leq K$ has a mean deviation at most $C(K)\eps^{\prime\gamma(K)}\leq C(K)\eps^{\gamma(K)}$. This gives the first inequality, and the second one follows by summing a geometric series.
+
+\medskip
+
+{\bf Proof of (iii).} Set $\kappa:=k(\sigma,\tau)$. By the Cauchy--Schwarz inequality,
+\begin{align*}
+\big|u(t)-u(s)-\kappa(t-s)\big|=\left|\int_s^t(u^\prime-\kappa)dx\right|&\leq\sqrt{t-s}\left(\int_\sigma^\tau|u^\prime-\kappa|^2dx\right)^{1/2}\\
+&=\sqrt{t-s}\,\sqrt{\tau-\sigma}\left(\frac1{\tau-\sigma}\int_\sigma^\tau|u^\prime-\kappa|^2dx\right)^{1/2}.
+\end{align*}
+The last factor is bounded by $\Theta(|\kappa|,\tau-\sigma)$, since $[\sigma,\tau]$ itself is one of the good intervals in the supremum.
+\end{proof}
+
+\subsection{Intervals of lower and upper type} Since $f<g$, the solution cannot be close to both obstacles at the same point. To make this quantitative, let
+\begin{equation*}
+\eta_0:=\frac12\min_{[a,b]}(g-f)>0.
+\end{equation*}
+By the uniform continuity of $u$, $f$ and $g$ on $[a,b]$, we fix $\rho_0\in]0,\rho_1]$ such that, whenever $|x-y|\leq\rho_0$,
+\begin{equation*}
+|u(x)-u(y)|\leq\frac{\eta_0}4,\quad|f(x)-f(y)|\leq\frac{\eta_0}4\quad\hbox{and}\quad|g(x)-g(y)|\leq\frac{\eta_0}4.
+\end{equation*}
+
+\begin{definition}\label{Def-types}
+A compact interval $J\subset[a,b]$ of length $\leq\rho_0$ is
+\begin{align*}
+&\hbox{{\em of lower type} if }\max_Ju<\min_Jg;\\
+&\hbox{{\em of upper type} if }\min_Ju>\max_Jf.
+\end{align*}
+\end{definition}
+
+\begin{remark}\label{Remark-types}
+An interval may be of both types, e.g. far from both obstacles. Since $f<g$, every short interval has at least one type (Lemma \ref{L-dicho} below and Figure \ref{Fig-types}).
+\end{remark}
+
+\begin{figure}[H]
+\centering
+\scalebox{0.87}{\begin{tikzpicture}[x=1.25cm, y=1cm, font=\footnotesize,
+  declare function={F(\t)=0.2+0.15*exp(-((\t-2)/1.2)^2);
+    G(\t)=3.4-0.2*exp(-((\t-7.5)/1.2)^2);
+    U(\t)=1.775-1.425*cos(deg(pi*(\t-2)/5.5));}]
+  % strips
+  \fill[blue!8] (1.3,0) rectangle (2.7,3.6);
+  \fill[green!10] (4.3,0) rectangle (5.3,3.6);
+  \fill[orange!12] (6.8,0) rectangle (8.2,3.6);
+  % axis
+  \draw[->, gray] (-0.1,0) -- (10.9,0) node[right] {$x$};
+  % obstacles and solution
+  \draw[thick, gray, domain=0:10, samples=100, smooth] plot (\x,{F(\x)}) node[right, black] {$f$};
+  \draw[thick, gray, domain=0:10, samples=100, smooth] plot (\x,{G(\x)}) node[right, black] {$g$};
+  \draw[very thick, red!60!black, domain=0:10, samples=120, smooth] plot (\x,{U(\x)}) node[right] {$u$};
+  % J1: lower type
+  \draw[densely dashed, red!60!black] (1.3,{U(1.3)}) -- (2.7,{U(1.3)});
+  \draw[densely dashed, gray!70!black] (1.3,{G(1.3)}) -- (2.7,{G(1.3)});
+  \draw[<->, blue!60!black] (2.0,{U(1.3)+0.05}) -- (2.0,{G(1.3)-0.05});
+  \fill (2,0.35) circle (1.4pt);
+  \draw[densely dotted] (2,0.35) -- (2,0) node[below] {$x_1$};
+  \node[blue!60!black] at (2,3.9) {$\max_{J_1}u<\min_{J_1}g$};
+  % J2: upper type
+  \draw[densely dashed, red!60!black] (6.8,{U(6.8)}) -- (8.2,{U(6.8)});
+  \draw[densely dashed, gray!70!black] (6.8,{F(6.8)}) -- (8.2,{F(6.8)});
+  \draw[<->, orange!60!black] (7.5,{F(6.8)+0.05}) -- (7.5,{U(6.8)-0.05});
+  \fill (7.5,3.2) circle (1.4pt);
+  \draw[densely dotted] (7.5,0.2) -- (7.5,0) node[below] {$x_2$};
+  \node[orange!60!black] at (7.5,3.9) {$\min_{J_2}u>\max_{J_2}f$};
+  \node[green!40!black] at (4.8,3.9) {both inequalities};
+  % labels
+  \node[align=center] at (2,-0.7) {$J_1$: lower type};
+  \node[align=center] at (4.8,-0.7) {$J_3$: both types};
+  \node[align=center] at (7.5,-0.7) {$J_2$: upper type};
+\end{tikzpicture}}
+\caption{Definition \ref{Def-types} and Lemma \ref{L-dicho}. The interval $J_1$ contains the point $x_1$ of contact with $f$: it is of lower type, since $\max_{J_1}u$ (dashed red) lies below $\min_{J_1}g$ (dashed gray), so that $u$ stays away from $g$ on $J_1$. The interval $J_2$ contains the point $x_2$ of contact with $g$: it is of upper type, since $\min_{J_2}u$ (dashed red) lies above $\max_{J_2}f$ (dashed gray), so that $u$ stays away from $f$ on $J_2$. The interval $J_3$ contains no contact point and is far from both obstacles: both inequalities hold, and it is of both types.}\label{Fig-types}
+\end{figure}
+
+\begin{lemma}[Dichotomy]\label{L-dicho}
+Every compact interval $J\subset[a,b]$ of length $\leq\rho_0$ is of lower type or of upper type {\rm(}possibly both{\rm)}. Moreover, if $J$ contains a point of contact with $f$ {\rm(}resp. $g${\rm)}, then $J$ is of lower type {\rm(}resp. upper type{\rm)}.
+\end{lemma}
+
+\begin{proof}[\bf Proof of Lemma \ref{L-dicho}]
+Let $x_0\in J$. Since
+\begin{equation*}
+[g(x_0)-u(x_0)]+[u(x_0)-f(x_0)]=g(x_0)-f(x_0)\geq2\eta_0,
+\end{equation*}
+one of the two brackets is $\geq\eta_0$. If $g(x_0)-u(x_0)\geq\eta_0$, then, for all $y,z\in J$,
+\begin{equation*}
+g(z)-u(y)\geq\Big(g(x_0)-\frac{\eta_0}4\Big)-\Big(u(x_0)+\frac{\eta_0}4\Big)\geq\frac{\eta_0}2>0,
+\end{equation*}
+i.e. $\max_Ju<\min_Jg$, and $J$ is of lower type. If $u(x_0)-f(x_0)\geq\eta_0$, then, in the same way, for all $y,z\in J$,
+\begin{equation*}
+u(y)-f(z)\geq\Big(u(x_0)-\frac{\eta_0}4\Big)-\Big(f(x_0)+\frac{\eta_0}4\Big)\geq\frac{\eta_0}2>0,
+\end{equation*}
+i.e. $\min_Ju>\max_Jf$, and $J$ is of upper type.
+
+\smallskip
+
+Finally, if $u(x_0)=f(x_0)$, then $g(x_0)-u(x_0)=g(x_0)-f(x_0)\geq2\eta_0$, and $J$ is of lower type. If $u(x_0)=g(x_0)$, then $u(x_0)-f(x_0)=g(x_0)-f(x_0)\geq2\eta_0$, and $J$ is of upper type.
+\end{proof}
+
+On an interval of lower type, the upper obstacle is out of reach, so that the chords lying above $u$ are admissible. This is the key observation of the paper (see Figure \ref{Fig-free-chords}).
+
+\begin{lemma}[Free chords]\label{L-free}
+Let $J\subset[a,b]$ be a compact interval of length $\leq\rho_0$, and let $[\sigma,\tau]\subset J$.
+\begin{enumerate}[leftmargin=3em, itemsep=0.3em, topsep=0.3em]
+\item[{\rm(i)}] If $J$ is of lower type and $u\leq u_{\sigma,\tau}$ on $[\sigma,\tau]$, then $[\sigma,\tau]$ is good.
+\item[{\rm(ii)}] If $J$ is of upper type and $u\geq u_{\sigma,\tau}$ on $[\sigma,\tau]$, then $[\sigma,\tau]$ is good.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}[\bf Proof of Lemma \ref{L-free}]
+{\bf Proof of (i).} On $[\sigma,\tau]$, we have $u_{\sigma,\tau}\geq u\geq f$. Moreover, the chord is affine, hence bounded from above by the larger of its end values, and so
+\begin{equation*}
+u_{\sigma,\tau}\leq\max\{u(\sigma),u(\tau)\}\leq\max_Ju<\min_Jg\leq g\hbox{ on }[\sigma,\tau].
+\end{equation*}
+
+\medskip
+
+{\bf Proof of (ii).} On $[\sigma,\tau]$, we have $u_{\sigma,\tau}\leq u\leq g$. Moreover, the chord is bounded from below by the smaller of its end values, and so $u_{\sigma,\tau}\geq\min\{u(\sigma),u(\tau)\}\geq\min_Ju>\max_Jf\geq f$ on $[\sigma,\tau]$.
+\end{proof}
+
+\subsection{Symmetries} To shorten the proofs, we only treat intervals of lower type and right slopes in Sections \ref{Sect-Concavity} and \ref{Sect-Proof-Main}. The other cases follow from Lemma \ref{L-sym} below: \Rv{} exchanges lower and upper type, reversing all the inequalities on $u$ and on the slopes, and \Rh{} exchanges right and left, with the same functions $\Theta$ and $E$.
+
+\begin{definition}[Symmetries]\label{Def-sym}
+We consider the following two transformations of the problem.
+\begin{HypSym}[itemsep=0.5em, topsep=0.5em]
+\item[{\sf (R$_{\rm v}$)}]\phantomsection\label{HypS1} The {\em vertical reflection} is defined by
+\begin{align*}
+&\widetilde u:=-u,\ \widetilde L(x,w,v):=L(x,-w,-v);\\
+&\widetilde f:=-g,\ \widetilde g:=-f;\\
+&\widetilde A:=-A,\ \widetilde B:=-B.
+\end{align*}
+\item[{\sf (R$_{\rm h}$)}]\phantomsection\label{HypS2} The {\em horizontal reflection} is defined, with $\widehat y:=a+b-y$, by
+\begin{align*}
+&\widetilde u(y):=u(\widehat y),\ \widetilde L(y,w,v):=L(\widehat y,w,-v);\\
+&\widetilde f(y):=f(\widehat y),\ \widetilde g(y):=g(\widehat y);\\
+&\widetilde A:=B,\ \widetilde B:=A.
+\end{align*}
+\end{HypSym}
+\end{definition}
+
+\begin{lemma}[Symmetries]\label{L-sym}
+Under the transformation \Rv{} or \Rh{}, the following assertions hold.
+\begin{enumerate}[leftmargin=3em, itemsep=0.5em, topsep=0.5em]
+\item[{\rm(i)}] $\widetilde L$ satisfies \ref{HypH1} and \ref{HypH2}, and $\widetilde u$ is a solution of the transformed problem with the same finite energy.
+\item[{\rm(ii)}] \Rv{} exchanges \Of\ and \Og, and \Rh{} leaves them invariant.
+\item[{\rm(iii)}] The numbers $C_0$, $N$, $\rho_1$, $\eta_0$ and $\rho_0$, the good intervals {\rm(}up to the reflection $[\sigma,\tau]\mapsto[\widehat\tau,\widehat\sigma]$ under \Rh{}{\rm)}, and the functions $\Theta$ and $E$ are the same for both problems.
+\item[{\rm(iv)}] \Rv{} exchanges the intervals of lower type and of upper type, and \Rh{} preserves the types. Moreover, \Rh{} exchanges right and left slopes{\rm:}
+\begin{equation*}
+k_{\widetilde u}(s,t)=-k_u(\widehat t,\widehat s)\quad\hbox{and}\quad\widetilde u^\prime_\pm(y)=-u^\prime_\mp(\widehat y)\hbox{ when they exist.}
+\end{equation*}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}[\bf Proof of Lemma \ref{L-sym}]
+{\bf Proof of (i).} For \Rv{}, let $v\in W^{1,1}([a,b])$ and $\widetilde v:=-v$. Then $\widetilde L(x,\widetilde v,\widetilde v^\prime)=L(x,v,v^\prime)$, so that $\mathcal{J}_{\widetilde L}(\widetilde v;I)=\J(v;I)$, and $f\leq v\leq g$ if and only if $\widetilde f\leq\widetilde v\leq\widetilde g$. Hence $\widetilde u$ is a solution of the transformed problem, with the same finite energy. The Lagrangian $\widetilde L$ satisfies \ref{HypH1}, with the same constants on the reflected compact set, and \ref{HypH2}, since $\widetilde L_{vv}(x,w,v)=L_{vv}(x,-w,-v)\geq\mu$.
+
+\smallskip
+
+For \Rh{}, let $\widetilde v(y):=v(\widehat y)$. Then $\widetilde L(y,\widetilde v(y),\widetilde v^\prime(y))=L(\widehat y,v(\widehat y),v^\prime(\widehat y))$, so that the energies coincide after the change of variables $x=\widehat y$. The constraint is preserved, the boundary values are exchanged, and \ref{HypH1} and \ref{HypH2} are preserved, since $\widetilde L_{vv}(y,w,v)=L_{vv}(\widehat y,w,-v)$.
+
+\medskip
+
+{\bf Proof of (ii).} For \Rv{}, we have $k_{\widetilde f}=-k_g$, so that
+\begin{equation*}
+D_-\widetilde f=-D^-g\quad\hbox{and}\quad D^+\widetilde f=-D_+g.
+\end{equation*}
+Hence \Of\ for $\widetilde f$ is exactly \Og\ for $g$, and conversely.
+
+\smallskip
+
+For \Rh{}, let $h$ be a function on $[a,b]$ and $\widetilde h(y):=h(\widehat y)$. For $a\leq s<t\leq b$,
+\begin{equation}\label{slope-reflection}
+k_{\widetilde h}(s,t)=\frac{h(\widehat t)-h(\widehat s)}{t-s}=-k_h(\widehat t,\widehat s).
+\end{equation}
+So the right slopes of $\widetilde h$ at $y$ are the opposites of the left slopes of $h$ at $\widehat y$, and conversely. In particular,
+\begin{equation*}
+D_-\widetilde f(y)=-D^+f(\widehat y)\quad\hbox{and}\quad D^+\widetilde f(y)=-D_-f(\widehat y),
+\end{equation*}
+so that \Of\ is invariant, and similarly for \Og.
+
+\medskip
+
+{\bf Proof of (iii).} For \Rv{}, the set $Q$ is replaced by its reflection, and
+\begin{equation*}
+\widetilde L_v(x,w,0)=-L_v(x,-w,0),
+\end{equation*}
+so that $\widetilde C_0=C_0$. The energy is unchanged, so that $N$ and $\rho_1$ are unchanged. The moduli of continuity of $\widetilde u$, $\widetilde f$ and $\widetilde g$ are those of $u$, $f$ and $g$, and $\widetilde g-\widetilde f$ has the same minimum as $g-f$, so that $\eta_0$ and $\rho_0$ still work. Moreover,
+\begin{equation*}
+k_{\widetilde u}=-k_u,\quad|\widetilde u^\prime-k_{\widetilde u}(\sigma,\tau)|=|u^\prime-k_u(\sigma,\tau)|\quad\hbox{and}\quad\widetilde u_{\sigma,\tau}=-u_{\sigma,\tau}.
+\end{equation*}
+So the good intervals are the same for $u$ and $\widetilde u$, with the same $|k(\sigma,\tau)|$ and the same mean deviation, and $\Theta$ and $E$ are the same.
+
+\smallskip
+
+For \Rh{}, the numbers $C_0$, $N$, $\rho_1$, $\eta_0$ and $\rho_0$ are clearly unchanged. By \eqref{slope-reflection}, the good intervals $[\sigma,\tau]$ for $u$ correspond to the good intervals $[\widehat\tau,\widehat\sigma]$ for $\widetilde u$, with the same length, the same $|k|$ and the same mean deviation, so that $\Theta$ and $E$ are unchanged.
+
+\medskip
+
+{\bf Proof of (iv).} For \Rv{}, $\max_Ju<\min_Jg$ if and only if $\min_J\widetilde u>\max_J\widetilde f$: ``lower type'' for $u$ is ``upper type'' for $\widetilde u$, and conversely.
+
+\smallskip
+
+For \Rh{}, the types are preserved, since they only involve $\max$ and $\min$ over the interval. The formula for the slopes is \eqref{slope-reflection} with $h=u$, and it gives $\widetilde u^\prime_\pm(y)=-u^\prime_\mp(\widehat y)$ when these one-sided derivatives exist.
+\end{proof}
+
+\section{\textsc{\textsf{Local structure near the obstacles}}}\label{Sect-Concavity}
+
+In this section, $J$ is an interval of lower type. On $J$, the free chords lie above $u$, which makes $u$ approximately concave (Lemma \ref{L-conc}). Its slopes are then almost monotone (Lemma \ref{L-mono}), and $u$ has one-sided derivatives and no convex corner on $J$ (Lemma \ref{L-corner}). By Lemma \ref{L-sym} applied with \Rv{}, the same results hold on intervals of upper type, with reversed inequalities: $u$ is approximately convex and has no concave corner there.
+
+\begin{lemma}[Approximate concavity]\label{L-conc}
+Let $J$ be of lower type and let $x<y<z$ in $J$. Then
+\begin{equation}\label{conc}
+u_{x,z}(y)-u(y)\leq\Theta\big(|k(x,z)|,z-x\big)\sqrt{(z-x)\min\{y-x,z-y\}}.
+\end{equation}
+Consequently, the following assertions hold{\rm:}
+\begin{enumerate}[leftmargin=3em, itemsep=0.6em, topsep=0.6em]
+\item[{\rm(i)}] if $[x,x+\rho]\subset J$ and $\theta\in[\frac14,1]$, then
+\begin{equation*}
+k(x,x+\theta\rho)\geq k(x,x+\rho)-2\Theta\big(|k(x,x+\rho)|,\rho\big);
+\end{equation*}
+\item[{\rm(ii)}] if $[x-\rho,x]\subset J$ and $\theta\in[\frac14,1]$, then
+\begin{equation*}
+k(x-\theta\rho,x)\leq k(x-\rho,x)+2\Theta\big(|k(x-\rho,x)|,\rho\big);
+\end{equation*}
+\item[{\rm(iii)}] if $[x-h,x+h^\prime]\subset J$ with $h,h^\prime>0$, then
+\begin{equation*}
+\frac{hh^\prime}{h+h^\prime}\big(k(x,x+h^\prime)-k(x-h,x)\big)\leq\Theta\big(|k(x-h,x+h^\prime)|,h+h^\prime\big)\sqrt{(h+h^\prime)\min\{h,h^\prime\}}.
+\end{equation*}
+\end{enumerate}
+\end{lemma}
+
+\begin{remark}[Meaning of Lemma \ref{L-conc}]\label{Remark-conc}
+\begin{enumerate}[leftmargin=2em, itemsep=0.6em, topsep=0.6em]
+\item[(a)] {\sf Inequality \eqref{conc}.} It says that $u$ lies almost above its chords on $J$: the defect $u_{x,z}(y)-u(y)$ is small compared with the length of the chord.
+\item[(b)] {\sf Assertions (i) and (ii).} They say that the right slopes almost increase, and the left slopes almost decrease, when the interval shrinks.
+\item[(c)] {\sf Assertion (iii).} It says that a right slope cannot exceed a left slope by much, i.e. $u$ has no convex corner on $J$.
+\end{enumerate}
+\end{remark}
+
+\begin{proof}[\bf Proof of Lemma \ref{L-conc}]
+Let $c:=u_{x,z}$. If $u(y)\geq c(y)$, the left-hand side of \eqref{conc} is nonpositive and there is nothing to prove. Assume that $u(y)<c(y)$. The proof of \eqref{conc} is divided into three steps.
+
+\medskip
+
+{\bf Step 1: the component of \boldmath$y$\unboldmath.} The set
+\begin{equation*}
+O:=\big\{t\in]x,z[\,:\,u(t)<c(t)\big\}
+\end{equation*}
+is open, since $u-c$ is continuous. So the connected component of $O$ containing $y$ is an open interval $]\sigma,\tau[$ with $x\leq\sigma<y<\tau\leq z$. We claim that $u(\sigma)=c(\sigma)$. If $\sigma=x$, this holds by definition of the chord. If $\sigma>x$, then $\sigma\in]x,z[$ does not belong to $O$, by maximality of the component, so that $u(\sigma)\geq c(\sigma)$. Moreover, $\sigma$ is a limit of points where $u<c$, so that $u(\sigma)\leq c(\sigma)$ by continuity. In the same way, $u(\tau)=c(\tau)$.
+
+\medskip
+
+{\bf Step 2: \boldmath$[\sigma,\tau]$\unboldmath\ is good.} The function $c$ is affine and coincides with $u$ at $\sigma$ and $\tau$. So, on $[\sigma,\tau]$, it is the chord of $u$ on $[\sigma,\tau]$:
+\begin{equation*}
+c=u_{\sigma,\tau}\hbox{ on }[\sigma,\tau]\quad\hbox{and}\quad k(\sigma,\tau)=k(x,z).
+\end{equation*}
+Moreover, $u\leq c=u_{\sigma,\tau}$ on $[\sigma,\tau]$. As $[\sigma,\tau]\subset J$ and $J$ is of lower type, Lemma \ref{L-free}(i) shows that $[\sigma,\tau]$ is good. Finally, $\tau-\sigma\leq z-x\leq\rho_0\leq\rho_1$, so that Lemma \ref{L-Theta}(iii) applies on $[\sigma,\tau]$.
+
+\medskip
+
+{\bf Step 3: use of Lemma \ref{L-Theta}(iii).} Set $\kappa:=k(x,z)$ and $\Theta_*:=\Theta(|\kappa|,\tau-\sigma)$. With $(s,t)=(\sigma,y)$ and $c(y)=u(\sigma)+\kappa(y-\sigma)$, \eqref{CS} gives
+\begin{equation*}
+c(y)-u(y)=-\big[u(y)-u(\sigma)-\kappa(y-\sigma)\big]\leq\Theta_*\sqrt{(\tau-\sigma)(y-\sigma)}.
+\end{equation*}
+With $(s,t)=(y,\tau)$ and $c(y)=u(\tau)-\kappa(\tau-y)$, \eqref{CS} gives
+\begin{equation*}
+c(y)-u(y)=u(\tau)-u(y)-\kappa(\tau-y)\leq\Theta_*\sqrt{(\tau-\sigma)(\tau-y)}.
+\end{equation*}
+Taking the smaller of the two bounds, we get
+\begin{equation*}
+c(y)-u(y)\leq\Theta_*\sqrt{(\tau-\sigma)\min\{y-\sigma,\tau-y\}}.
+\end{equation*}
+Since $\tau-\sigma\leq z-x$, $y-\sigma\leq y-x$ and $\tau-y\leq z-y$, and since $\Theta_*\leq\Theta(|\kappa|,z-x)$ by Lemma \ref{L-Theta}(i), this gives \eqref{conc}.
+
+\medskip
+
+{\bf Proof of (i).} For $\theta=1$, there is nothing to prove. Let $\theta\in[\frac14,1[$, and take $z:=x+\rho$ and $y:=x+\theta\rho$. Then
+\begin{equation*}
+u_{x,z}(y)=u(x)+k(x,z)\theta\rho\quad\hbox{and}\quad u(y)=u(x)+k(x,y)\theta\rho,
+\end{equation*}
+so that $u_{x,z}(y)-u(y)=\theta\rho\,[k(x,z)-k(x,y)]$. By \eqref{conc}, with $z-x=\rho$, $y-x=\theta\rho$ and $z-y=(1-\theta)\rho$,
+\begin{equation*}
+k(x,z)-k(x,y)\leq\frac{\sqrt{\min\{\theta,1-\theta\}}}{\theta}\,\Theta\big(|k(x,z)|,\rho\big).
+\end{equation*}
+The factor is at most $2$: on $[\frac14,\frac12]$, it is $\theta^{-1/2}\leq2$, and on $[\frac12,1[$, it is $\frac{\sqrt{1-\theta}}\theta\leq\frac{\sqrt{1/2}}{1/2}=\sqrt2\leq2$. This gives (i).
+
+\medskip
+
+{\bf Proof of (ii).} Take the chord on $[x-\rho,x]$ and $y:=x-\theta\rho$. Then
+\begin{equation*}
+u_{x-\rho,x}(y)=u(x)-k(x-\rho,x)\theta\rho\quad\hbox{and}\quad u(y)=u(x)-k(y,x)\theta\rho,
+\end{equation*}
+so that $u_{x-\rho,x}(y)-u(y)=\theta\rho\,[k(y,x)-k(x-\rho,x)]$. Applying \eqref{conc} on $[x-\rho,x]$ at the point $y$, the interval has length $\rho$ and $\min\{y-(x-\rho),x-y\}=\rho\min\{1-\theta,\theta\}$. Hence
+\begin{equation*}
+k(y,x)-k(x-\rho,x)\leq\frac{\sqrt{\min\{\theta,1-\theta\}}}{\theta}\,\Theta\big(|k(x-\rho,x)|,\rho\big),
+\end{equation*}
+and we conclude as in (i).
+
+\medskip
+
+{\bf Proof of (iii).} The chord of $u$ on $[x-h,x+h^\prime]$ takes at $x$ the value $\frac{h^\prime u(x-h)+hu(x+h^\prime)}{h+h^\prime}$. Hence
+\begin{align*}
+u_{x-h,x+h^\prime}(x)-u(x)&=\frac{h\,[u(x+h^\prime)-u(x)]-h^\prime[u(x)-u(x-h)]}{h+h^\prime}\\
+&=\frac{hh^\prime}{h+h^\prime}\big[k(x,x+h^\prime)-k(x-h,x)\big],
+\end{align*}
+and (iii) follows from \eqref{conc} applied to $(x-h,x,x+h^\prime)$, for which the length is $h+h^\prime$ and the minimum is $\min\{h,h^\prime\}$.
+\end{proof}
+
+Lemma \ref{L-conc}(i) compares the right slopes of $u$ at two comparable scales only, namely $\theta\rho$ and $\rho$ with $\theta\in[\frac14,1]$. Iterating it along the dyadic scales $2^{-j}r$, we compare them at all smaller scales, with a total error controlled by $E$. The same holds for the left slopes.
+
+\begin{lemma}[One-sided monotonicity of slopes]\label{L-mono}
+Let $J$ be of lower type, let $\ell\in\RR$ and let $r\in]0,\rho_0]$ be such that $E(|\ell|+1,r)\leq1$. Then the following assertions hold{\rm:}
+\begin{enumerate}[leftmargin=3em, itemsep=0.6em, topsep=0.6em]
+\item[{\rm(i)}] if $[x,x+r]\subset J$ and $k(x,x+r)\geq\ell$, then
+\begin{equation*}
+k(x,x+\rho)\geq\ell-E(|\ell|+1,r)\hbox{ for all }\rho\in]0,r];
+\end{equation*}
+\item[{\rm(ii)}] if $[x-r,x]\subset J$ and $k(x-r,x)\leq\ell$, then
+\begin{equation*}
+k(x-\rho,x)\leq\ell+E(|\ell|+1,r)\hbox{ for all }\rho\in]0,r].
+\end{equation*}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}[\bf Proof of Lemma \ref{L-mono}]
+{\bf Proof of (i).} Since $[x,x+r]\subset J$, we have $r\leq\rho_0\leq\rho_1$, so that $\Theta(\cdot,2^{-j}r)$ and $E(\cdot,r)$ are defined. Set $M:=|\ell|+1$ and $\varphi(\rho):=k(x,x+\rho)$, which is continuous on $]0,r]$. For $j\geq0$, let
+\begin{equation*}
+D_j:=[2^{-j-1}r,2^{-j}r]\quad\hbox{and}\quad e_j:=2\Theta(M,2^{-j}r),
+\end{equation*}
+and let $t_j\in D_j$ be such that $m_j:=\varphi(t_j)=\min_{D_j}\varphi$; it exists since $\varphi$ is continuous on the compact set $D_j$. By Lemma \ref{L-Theta}(i), $(e_j)_j$ is nonincreasing. Below, Lemma \ref{L-conc}(i) is applied on intervals $[x,x+\rho^\prime]\subset[x,x+r]\subset J$. We prove by induction that
+\begin{equation*}
+(\mathcal{P}_j)\qquad m_j\geq\ell-e_0-\sum_{i<j}e_i.
+\end{equation*}
+This gives (i). Indeed,
+\begin{equation*}
+e_0+\sum_{i\geq0}e_i=2\Theta(M,r)+2\sum_{i\geq0}\Theta(M,2^{-i}r)\leq4\sum_{i\geq0}\Theta(M,2^{-i}r)=E(M,r),
+\end{equation*}
+and every $\rho\in]0,r]$ belongs to some $D_j$, so that
+\begin{equation*}
+\varphi(\rho)\geq m_j\geq\ell-e_0-\sum_{i<j}e_i\geq\ell-E(M,r).
+\end{equation*}
+
+\medskip
+
+{\bf Step 1: proof of \boldmath$(\mathcal{P}_0)$\unboldmath.} If $m_0\geq\ell$, there is nothing to prove. Otherwise, $\varphi(r)\geq\ell>\varphi(t_0)$, and the intermediate value theorem on $[t_0,r]$ gives $\rho^\prime\in]t_0,r]$ with $\varphi(\rho^\prime)=\ell$. Since $t_0\geq\frac r2$ and $t_0<\rho^\prime\leq r$, we have $\theta:=t_0/\rho^\prime\in[\frac12,1[$. Lemma \ref{L-conc}(i) with $\rho=\rho^\prime$ and this $\theta$ gives
+\begin{equation*}
+\varphi(t_0)=k(x,x+\theta\rho^\prime)\geq k(x,x+\rho^\prime)-2\Theta\big(|k(x,x+\rho^\prime)|,\rho^\prime\big)=\ell-2\Theta(|\ell|,\rho^\prime).
+\end{equation*}
+As $|\ell|\leq M$ and $\rho^\prime\leq r$, we have $2\Theta(|\ell|,\rho^\prime)\leq2\Theta(M,r)=e_0$, and so $m_0\geq\ell-e_0$.
+
+\medskip
+
+{\bf Step 2: \boldmath$(\mathcal{P}_j)\then(\mathcal{P}_{j+1})$\unboldmath.} If $m_{j+1}\geq\ell$, there is nothing to prove. Assume that $m_{j+1}<\ell$. We distinguish two cases.
+
+\smallskip
+
+{\bf Step 2.1: case \boldmath$m_j>\ell$\unboldmath.} The point $2^{-j-1}r$ is the left end of $D_j$, so that $\varphi(2^{-j-1}r)\geq\min_{D_j}\varphi=m_j>\ell$. It is also the right end of $D_{j+1}\ni t_{j+1}$, and $\varphi(t_{j+1})<\ell<\varphi(2^{-j-1}r)$ forces $t_{j+1}<2^{-j-1}r$. By the intermediate value theorem, there is $\rho^\prime\in]t_{j+1},2^{-j-1}r[$ with $\varphi(\rho^\prime)=\ell$. Since $t_{j+1}\geq2^{-j-2}r$ and $\rho^\prime<2^{-j-1}r$, we have $t_{j+1}/\rho^\prime>\frac12$. Lemma \ref{L-conc}(i) with $\rho=\rho^\prime$ and $\theta=t_{j+1}/\rho^\prime$ gives
+\begin{equation*}
+m_{j+1}=\varphi(t_{j+1})\geq\ell-2\Theta(|\ell|,\rho^\prime)\geq\ell-e_0,
+\end{equation*}
+which implies $(\mathcal{P}_{j+1})$, whose right-hand side is $\ell-e_0-\sum_{i\leq j}e_i\leq\ell-e_0$. In this case, the size of $m_j$ is irrelevant: we only use the chord of slope exactly $\ell$, which is why $\Theta(|\ell|,\cdot)$ appears.
+
+\smallskip
+
+{\bf Step 2.2: case \boldmath$m_j\leq\ell$\unboldmath.} By $(\mathcal{P}_j)$ and the computation of the sum above,
+\begin{equation*}
+m_j\geq\ell-\Big(e_0+\sum_{i<j}e_i\Big)\geq\ell-E(M,r)\geq\ell-1.
+\end{equation*}
+Together with $m_j\leq\ell$, this gives $|\varphi(t_j)|=|m_j|\leq\max\{|\ell|,|\ell-1|\}\leq M$. Since $t_j\in[2^{-j-1}r,2^{-j}r]$, we have $D_{j+1}=[2^{-j-2}r,2^{-j-1}r]\subset[\frac14t_j,t_j]$. Thus, for every $\rho^{\prime\prime}\in D_{j+1}$, we have $\theta:=\rho^{\prime\prime}/t_j\in[\frac14,1]$, and Lemma \ref{L-conc}(i) with $\rho=t_j$ gives
+\begin{equation*}
+\varphi(\rho^{\prime\prime})\geq\varphi(t_j)-2\Theta(|\varphi(t_j)|,t_j)\geq m_j-2\Theta(M,2^{-j}r)=m_j-e_j.
+\end{equation*}
+Taking $\rho^{\prime\prime}=t_{j+1}$ and using $(\mathcal{P}_j)$, we get
+\begin{equation*}
+m_{j+1}\geq\ell-e_0-\sum_{i<j}e_i-e_j=\ell-e_0-\sum_{i<j+1}e_i,
+\end{equation*}
+which is $(\mathcal{P}_{j+1})$. There is no circularity: the hypothesis $E(M,r)\leq1$ is an assumption on $\Theta$, not on $\varphi$.
+
+\medskip
+
+{\bf Proof of (ii).} We deduce it from (i) by \Rh{}. Let $\widetilde u:=u(a+b-\cdot)$, $\widetilde x:=a+b-x$ and $\widetilde J:=a+b-J$. By Lemma \ref{L-sym}, $\widetilde J$ is of lower type for $\widetilde u$, with $[\widetilde x,\widetilde x+r]\subset\widetilde J$, and the functions $\Theta$ and $E$ are unchanged. By Lemma \ref{L-sym}(iv),
+\begin{equation*}
+k_{\widetilde u}(\widetilde x,\widetilde x+\rho)=-k_u(x-\rho,x).
+\end{equation*}
+So the hypothesis $k_u(x-r,x)\leq\ell$ reads $k_{\widetilde u}(\widetilde x,\widetilde x+r)\geq-\ell$, and (i) for $\widetilde u$ with $-\ell$ (note that $|-\ell|+1=|\ell|+1$) gives $k_{\widetilde u}(\widetilde x,\widetilde x+\rho)\geq-\ell-E(|\ell|+1,r)$, i.e. $k_u(x-\rho,x)\leq\ell+E(|\ell|+1,r)$. Alternatively, (ii) can be proved as (i), using Lemma \ref{L-conc}(ii).
+\end{proof}
+
+We can now pass to the limit in the slopes. Lemma \ref{L-mono} prevents the right and left slopes from oscillating, so that they converge, and Lemma \ref{L-conc}(iii) prevents a right derivative from exceeding a left one.
+
+\begin{lemma}[One-sided derivatives and absence of convex corners]\label{L-corner}
+Let $J$ be of lower type. Then the following assertions hold{\rm:}
+\begin{enumerate}[leftmargin=3em, itemsep=0.6em, topsep=0.6em]
+\item[{\rm(i)}] for every $x\in J$ which is not the right {\rm(}resp. left{\rm)} end of $J$, the limit
+\begin{equation*}
+u^\prime_+(x):=\lim_{\rho\to0^+}k(x,x+\rho)\quad{\rm(}\hbox{resp. }u^\prime_-(x):=\lim_{\rho\to0^+}k(x-\rho,x){\rm)}
+\end{equation*}
+exists in $[-\infty,\infty]${\rm;}
+\item[{\rm(ii)}] for every $x$ in the interior of $J$,
+\begin{equation*}
+u^\prime_+(x)\leq u^\prime_-(x).
+\end{equation*}
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}[\bf Proof of Lemma \ref{L-corner}]
+{\bf Proof of (i).} Let $\varphi(\rho):=k(x,x+\rho)$. Assume, by contradiction, that the limit of $\varphi$ at $0^+$ does not exist in $[-\infty,\infty]$. Then we can choose $\ell\in\RR$ such that
+\begin{equation*}
+\liminf_{\rho\to0^+}\varphi(\rho)<\ell<\limsup_{\rho\to0^+}\varphi(\rho).
+\end{equation*}
+Since $\limsup_{\rho\to0^+}\varphi>\ell$, there exist $r_n\to0$ with $\varphi(r_n)\geq\ell$. For $n$ large enough, $[x,x+r_n]\subset J$ and, by Lemma \ref{L-Theta}(ii), $E(|\ell|+1,r_n)\leq1$. So Lemma \ref{L-mono}(i) applies with $r=r_n$, and gives
+\begin{equation*}
+\varphi(\rho)\geq\ell-E(|\ell|+1,r_n)\hbox{ for all }\rho\in]0,r_n].
+\end{equation*}
+Hence $\liminf_{\rho\to0^+}\varphi\geq\ell-E(|\ell|+1,r_n)$ for every large $n$, and letting $n\to\infty$ we get $\liminf_{\rho\to0^+}\varphi\geq\ell$, a contradiction.
+
+\smallskip
+
+On the left, let $\psi(\rho):=k(x-\rho,x)$, and assume that $\liminf_{\rho\to0^+}\psi<\ell<\limsup_{\rho\to0^+}\psi$ for some $\ell\in\RR$. There exist $r_n\to0$ with $\psi(r_n)\leq\ell$, and Lemma \ref{L-mono}(ii) gives $\psi\leq\ell+E(|\ell|+1,r_n)$ on $]0,r_n]$. Hence $\limsup_{\rho\to0^+}\psi\leq\ell$, a contradiction.
+
+\medskip
+
+{\bf Proof of (ii).} For $h>0$ small, set
+\begin{align*}
+&k_R(h):=k(x,x+h),\quad\mathsf{b}(h):=u(x+h)-u(x)=hk_R(h);\\
+&k_L(h):=k(x-h,x),\quad\mathsf{a}(h):=u(x-h)-u(x)=-hk_L(h).
+\end{align*}
+Assume, by contradiction, that $u^\prime_-(x)<u^\prime_+(x)$. Then exactly one of the following three cases occurs:
+\begin{align*}
+&\hbox{Case 1: }u^\prime_-(x)\hbox{ and }u^\prime_+(x)\hbox{ are finite};\\
+&\hbox{Case 2: }u^\prime_+(x)=+\infty\hbox{ and }u^\prime_-(x)<+\infty;\\
+&\hbox{Case 3: }u^\prime_+(x)\in\RR\hbox{ and }u^\prime_-(x)=-\infty.
+\end{align*}
+Indeed, if $u^\prime_+(x)=+\infty$, we are in Case 2. Otherwise, $u^\prime_+(x)<+\infty$, and $u^\prime_+(x)=-\infty$ is impossible, since it would give $u^\prime_-(x)<-\infty$. So $u^\prime_+(x)$ is finite, and then $u^\prime_-(x)<+\infty$: we are in Case 1 or in Case 3.
+
+\medskip
+
+{\bf Case 1: \boldmath$u^\prime_-(x)$ and $u^\prime_+(x)$\unboldmath\ are finite.} Since
+\begin{equation*}
+k(x-h,x+h)=\frac{\mathsf b(h)-\mathsf a(h)}{2h}=\frac12\big(k_L(h)+k_R(h)\big)
+\end{equation*}
+converges as $h\to0^+$, there is $K\geq0$ with $|k(x-h,x+h)|\leq K$ for $h$ small. For $h$ small, $[x-h,x+h]\subset J$, and Lemma \ref{L-conc}(iii) with $h^\prime=h$ gives
+\begin{equation*}
+\frac h2\big(k_R(h)-k_L(h)\big)\leq\Theta\big(|k(x-h,x+h)|,2h\big)\sqrt{2h\cdot h}\leq\sqrt2\,h\,\Theta(K,2h),
+\end{equation*}
+i.e. $k_R(h)-k_L(h)\leq2\sqrt2\,\Theta(K,2h)$. Since $\Theta(K,2h)\to0$ by Lemma \ref{L-Theta}(ii), letting $h\to0$ gives $u^\prime_+(x)\leq u^\prime_-(x)$, a contradiction.
+
+\medskip
+
+{\bf Case 2: \boldmath$u^\prime_+(x)=+\infty$ and $u^\prime_-(x)<+\infty$\unboldmath.} Since $k_L(h)\to u^\prime_-(x)<+\infty$, $k_L$ is bounded from above near $0$, and since $k_R(h)\to+\infty$, we have $k_R\geq1$ near $0$. Hence there exist $M_1\geq1$ and $t_0>0$ such that
+\begin{equation*}
+[x-t_0,x+t_0]\subset J,\quad k_L\leq M_1\quad\hbox{and}\quad k_R\geq1\hbox{ on }]0,t_0].
+\end{equation*}
+Either $k_L(h_n)\geq-M_1$ for a sequence $h_n\to0$ (Case 2.1), or there is $t_1\in]0,t_0]$ with $k_L<-M_1$ on $]0,t_1]$ (Case 2.2).
+
+\smallskip
+
+{\bf Case 2.1: there exist \boldmath$h_n\to0$ with $k_L(h_n)\geq-M_1$\unboldmath.} Fix $h=h_n\leq t_0$. Since $\mathsf b(h)=hk_R(h)\geq h$, $\mathsf b$ is continuous and $\mathsf b(t)\to0$ as $t\to0^+$, the intermediate value theorem gives $h^\prime\in]0,h]$ with $\mathsf b(h^\prime)=h$. Let
+\begin{equation*}
+R:=\frac h{h^\prime}=\frac{\mathsf b(h^\prime)}{h^\prime}=k_R(h^\prime).
+\end{equation*}
+As $n\to\infty$, $h^\prime\leq h_n\to0$, so that $R=k_R(h^\prime)\to u^\prime_+(x)=+\infty$. The slope of the chord on $[x-h,x+h^\prime]$ is
+\begin{equation*}
+\frac{u(x+h^\prime)-u(x-h)}{h+h^\prime}=\frac{\mathsf b(h^\prime)-\mathsf a(h)}{h+h^\prime}=\frac{h+hk_L(h)}{h+h^\prime},
+\end{equation*}
+and, since $-M_1\leq k_L(h)\leq M_1$, its modulus is bounded by $\frac{h(1+M_1)}{h+h^\prime}\leq1+M_1$. For $n$ large, $k_R(h^\prime)-k_L(h)\geq R-M_1>0$, and $\frac{hh^\prime}{h+h^\prime}\geq\frac{h^\prime}2$ since $h^\prime\leq h$. On the other hand, Lemma \ref{L-conc}(iii) applies, with $h+h^\prime\leq2h$ and $\min\{h,h^\prime\}=h^\prime$. Hence
+\begin{equation*}
+\frac{h^\prime}{2}(R-M_1)\leq\frac{hh^\prime}{h+h^\prime}\big(k_R(h^\prime)-k_L(h)\big)\leq\Theta(1+M_1,2h)\sqrt{2hh^\prime}.
+\end{equation*}
+Dividing by $h=Rh^\prime$, we get
+\begin{equation*}
+\frac12\Big(1-\frac{M_1}{R}\Big)\leq\sqrt2\,\Theta(1+M_1,2h)\sqrt{\frac{h^\prime}h}=\sqrt2\,\Theta(1+M_1,2h)R^{-1/2}.
+\end{equation*}
+As $n\to\infty$, $R\to\infty$ and $\Theta(1+M_1,2h_n)\to0$, so that the left-hand side tends to $\frac12$ and the right-hand side to $0$, a contradiction.
+
+\smallskip
+
+{\bf Case 2.2: there exists \boldmath$t_1\in]0,t_0]$ such that $k_L<-M_1$ on $]0,t_1]$\unboldmath.} For $h\in]0,t_1]$, we have
+\begin{equation*}
+\mathsf{a}(h)=-hk_L(h)>M_1h\geq h\quad\hbox{and}\quad\mathsf{b}(h)=hk_R(h)\geq h.
+\end{equation*}
+Let $\beta\in]0,t_1]$. The function $\mathsf a$ is continuous on $[0,\beta]$ with $\mathsf a(0)=0<\beta<\mathsf a(\beta)$, so that the set $\{t\in]0,\beta]:\mathsf a(t)=\beta\}$ is nonempty, closed and bounded away from $0$: let $h\in]0,\beta[$ be its smallest element. In the same way, let $h^\prime\in]0,\beta]$ be the smallest $t\in]0,\beta]$ with $\mathsf b(t)=\beta$. Then
+\begin{equation*}
+u(x-h)=u(x)+\beta=u(x+h^\prime),
+\end{equation*}
+so that the chord on $[x-h,x+h^\prime]$ is the constant $u(x)+\beta$, of slope $0$. Applying \eqref{conc} to $(x-h,x,x+h^\prime)$, which lies in $J$, we get
+\begin{align*}
+\beta=u_{x-h,x+h^\prime}(x)-u(x)&\leq\Theta(0,h+h^\prime)\sqrt{(h+h^\prime)\min\{h,h^\prime\}}\\
+&\leq\Theta(0,2\beta)\sqrt{2\beta\cdot\beta}=\sqrt2\,\beta\,\Theta(0,2\beta),
+\end{align*}
+i.e. $1\leq\sqrt2\,\Theta(0,2\beta)$. This is impossible for $\beta$ small, since $\Theta(0,2\beta)\to0$ as $\beta\to0$ by Lemma \ref{L-Theta}(ii).
+
+\medskip
+
+{\bf Case 3: \boldmath$u^\prime_+(x)\in\RR$ and $u^\prime_-(x)=-\infty$\unboldmath.} We reduce it to Case 2 by \Rh{}. Let $\widetilde u:=u(a+b-\cdot)$, $\widetilde x:=a+b-x$ and $\widetilde J:=a+b-J$. By Lemma \ref{L-sym}, $\widetilde J$ is of lower type for $\widetilde u$ and contains $\widetilde x$ in its interior, and, by Lemma \ref{L-sym}(iv),
+\begin{equation*}
+\widetilde u^\prime_+(\widetilde x)=-u^\prime_-(x)=+\infty\quad\hbox{and}\quad\widetilde u^\prime_-(\widetilde x)=-u^\prime_+(x)<+\infty.
+\end{equation*}
+So $\widetilde u$ is in Case 2 at the point $\widetilde x$, which has been shown to be impossible.
+\end{proof}
+
+
+
+We summarize the local structure obtained in this section in Figure \ref{Fig-local}.
+
+\begin{figure}[!htb]
+\centering
+\begin{tikzpicture}[font=\footnotesize]
+% left: lower type
+\begin{scope}[x=1.15cm, y=1.1cm, declare function={U(\t)=2.3-0.7*abs(\t-2.5)-0.05*(\t-2.5)^2; F(\t)=0.3+0.08*sin(deg(1.2*\t));}]
+  \fill[blue!6] (0,-0.05) rectangle (5,3.3);
+  \draw[->, gray] (-0.1,0) -- (5.3,0) node[right] {$x$};
+  \draw[thick, gray, domain=0:5, samples=60, smooth] plot (\x,{F(\x)}) node[right, black] {$f$};
+  \draw[thick, gray, densely dashed] (0,3.2) -- (5,3.2) node[right, black] {$g$};
+  \draw[very thick, red!60!black, domain=0.3:2.5, samples=40] plot (\x,{U(\x)});
+  \draw[very thick, red!60!black, domain=2.5:4.7, samples=40] plot (\x,{U(\x)}) node[right] {$u$};
+  % chord below u
+  \draw[thick, blue!60!black] (1.0,{U(1.0)}) -- (4.0,{U(4.0)});
+  \fill[blue!60!black] (1.0,{U(1.0)}) circle (1.2pt) (4.0,{U(4.0)}) circle (1.2pt);
+  \node[blue!60!black, below] at (1.55,{U(1.0)}) {chord};
+  % half tangents
+  \draw[thick, densely dashed] (2.05,{2.3-0.7*0.45}) -- (3.05,{2.3+0.7*0.55});
+  \draw[thick, densely dashed] (1.95,{2.3+0.7*0.55}) -- (2.95,{2.3-0.7*0.45});
+  \fill (2.5,2.3) circle (1.5pt);
+  \node[right, inner sep=1pt] at (3.05,{2.3+0.7*0.55}) {slope $u^\prime_-(x_0)$};
+  \node[left, inner sep=1pt] at (1.95,{2.3+0.7*0.55}) {slope $u^\prime_+(x_0)$};
+  \draw[densely dotted] (2.5,2.3) -- (2.5,0) node[below] {$x_0$};
+  \node at (2.5,-0.75) {$J$ of lower type: $u$ approximately concave};
+\end{scope}
+% right: upper type
+\begin{scope}[shift={(7.4,0)}, x=1.15cm, y=1.1cm, declare function={V(\t)=1.0+0.7*abs(\t-2.5)+0.05*(\t-2.5)^2; G(\t)=3.1+0.08*sin(deg(1.2*\t));}]
+  \fill[orange!8] (0,-0.05) rectangle (5,3.3);
+  \draw[->, gray] (-0.1,0) -- (5.3,0) node[right] {$x$};
+  \draw[thick, gray, domain=0:5, samples=60, smooth] plot (\x,{G(\x)}) node[right, black] {$g$};
+  \draw[thick, gray, densely dashed] (0,0.15) -- (5,0.15) node[right, black] {$f$};
+  \draw[very thick, red!60!black, domain=0.3:2.5, samples=40] plot (\x,{V(\x)});
+  \draw[very thick, red!60!black, domain=2.5:4.7, samples=40] plot (\x,{V(\x)}) node[right] {$u$};
+  % chord above u
+  \draw[thick, blue!60!black] (1.0,{V(1.0)}) -- (4.0,{V(4.0)});
+  \fill[blue!60!black] (1.0,{V(1.0)}) circle (1.2pt) (4.0,{V(4.0)}) circle (1.2pt);
+  \node[blue!60!black, above] at (1.55,{V(1.0)}) {chord};
+  % half tangents
+  \draw[thick, densely dashed] (2.05,{1.0+0.7*0.45}) -- (3.05,{1.0-0.7*0.55});
+  \draw[thick, densely dashed] (1.95,{1.0-0.7*0.55}) -- (2.95,{1.0+0.7*0.45});
+  \fill (2.5,1.0) circle (1.5pt);
+  \node[right, inner sep=1pt] at (3.05,{1.0-0.7*0.55}) {slope $u^\prime_-(x_0)$};
+  \node[left, inner sep=1pt] at (1.95,{1.0-0.7*0.55}) {slope $u^\prime_+(x_0)$};
+  \draw[densely dotted] (2.5,1.0) -- (2.5,0) node[below] {$x_0$};
+  \node at (2.5,-0.75) {$J$ of upper type: $u$ approximately convex};
+\end{scope}
+\end{tikzpicture}
+\caption{The local structure of Section \ref{Sect-Concavity}. Left: on an interval $J$ of lower type, $u$ lies almost above its chords (Lemma \ref{L-conc}), its slopes are almost monotone (Lemma \ref{L-mono}), and its one-sided derivatives exist and satisfy $u^\prime_+(x_0)\leq u^\prime_-(x_0)$ (Lemma \ref{L-corner}): a concave corner is possible, a convex one is not. Right: on an interval of upper type, the picture is reflected by Lemma \ref{L-sym} applied with \Rv{}: $u$ lies almost below its chords, $u^\prime_-(x_0)\leq u^\prime_+(x_0)$, and a concave corner is impossible. At a contact point, \Of\ or \Og\ excludes the remaining corner (Section \ref{Sect-Proof-Main}).}\label{Fig-local}
+\end{figure}
+
+\FloatBarrier
+
+\section{\textsc{\textsf{Proof of the main result}}}\label{Sect-Proof-Main}
+
+The aim of this section is to prove Theorem \ref{T-main}. As in Sections \ref{Sect-Preliminaries} and \ref{Sect-Concavity}, we assume that \ref{HypH1} and \ref{HypH2} hold and we fix $u\in\Sol$ with $\J(u;[a,b])<\infty$; we now assume, in addition, that \Of\ and \Og\ hold. The proof relies on two lemmas.
+\begin{enumerate}[leftmargin=3em, itemsep=0.4em, topsep=0.5em]
+\item[$\scriptstyle\bullet$] {\sf Existence of the derivative} (Lemma \ref{L-exist}, see Figure \ref{Fig-contact}). By Lemma \ref{L-corner}, $u$ has one-sided derivatives everywhere, and a corner can only be concave near the lower obstacle, or convex near the upper one. At a contact point, \Of\ or \Og\ excludes this remaining corner, so that $u^\prime$ exists everywhere and is given by the obstacle at the contact points. This is the only place where \Of\ and \Og\ are used.
+\item[$\scriptstyle\bullet$] {\sf Strict differentiability} (Lemma \ref{L-strict}, see Figure \ref{Fig-main}). The slopes $k(s,t)$ converge to $u^\prime(x_0)$ as $s,t\to x_0$.
+\end{enumerate}
+Theorem \ref{T-main} then follows at the end of the section: assertion (i) is Lemma \ref{L-exist}, assertion (ii) is Lemma \ref{L-strict}, and the continuity of $u^\prime$ is a consequence of Lemma \ref{L-strict}.
+
+\begin{lemma}[Existence of the derivative]\label{L-exist}
+Assume that \Of\ and \Og\ hold. Then $u^\prime(x)$ exists in $[-\infty,\infty]$ for every $x\in[a,b]$ {\rm(}one-sided at $a$ and $b${\rm)}, and assertion {\rm(i)} of Theorem {\rm\ref{T-main}} holds.
+\end{lemma}
+
+\begin{proof}[\bf Proof of Lemma \ref{L-exist}]
+We distinguish the endpoints, the free points and the contact points.
+
+\medskip
+
+{\bf Step 1: endpoints.} At $x=a$, the interval $J:=[a,a+\rho_0]\cap[a,b]$ is of lower type or of upper type by Lemma \ref{L-dicho}. If it is of lower type, Lemma \ref{L-corner}(i) gives the existence of $u^\prime_+(a)$. If it is of upper type, we apply Lemma \ref{L-corner}(i) to $-u$, using \Rv{} and Lemma \ref{L-sym}. The case $x=b$ is similar. No condition on the obstacles is used here.
+
+\smallskip
+
+From now on, let $x\in]a,b[$.
+
+\medskip
+
+{\bf Step 2: free points.} Assume that $f(x)<u(x)<g(x)$. By continuity of $f$, $u$ and $g$ at $x$, there is an interval $J^\prime$ of length $\leq\rho_0$, which is a neighbourhood of $x$, such that
+\begin{equation*}
+\max_{J^\prime}f<\min_{J^\prime}u\leq\max_{J^\prime}u<\min_{J^\prime}g.
+\end{equation*}
+So $J^\prime$ is both of lower type and of upper type. By Lemma \ref{L-corner}, $u^\prime_\pm(x)$ exist and $u^\prime_+(x)\leq u^\prime_-(x)$. Let $\widetilde u:=-u$. By \Rv{} and Lemma \ref{L-sym}, $J^\prime$ is of lower type for $\widetilde u$, and $\widetilde u^\prime_\pm(x)=-u^\prime_\pm(x)$. So Lemma \ref{L-corner} applied to $\widetilde u$ gives $\widetilde u^\prime_+(x)\leq\widetilde u^\prime_-(x)$, i.e. $u^\prime_+(x)\geq u^\prime_-(x)$. Hence $u^\prime_+(x)=u^\prime_-(x)$, i.e. $u^\prime(x)$ exists in $[-\infty,\infty]$.
+
+\medskip
+
+{\bf Step 3: contact points with \boldmath$f$\unboldmath.} Assume that $u(x)=f(x)$. By Lemma \ref{L-dicho}, every interval of length $\leq\rho_0$ containing $x$ is of lower type, and we choose such an interval $J$ with $x$ in its interior. Since $u\geq f$ with equality at $x$, we have, for small $t>0$,
+\begin{align*}
+k(x,x+t)&=\frac{u(x+t)-u(x)}t\geq\frac{f(x+t)-f(x)}t=k_f(x,x+t);\\
+k(x-t,x)&=\frac{u(x)-u(x-t)}t\leq\frac{f(x)-f(x-t)}t=k_f(x-t,x).
+\end{align*}
+We claim that (see Figure \ref{Fig-contact})
+\begin{equation*}
+u^\prime_-(x)\leq D_-f(x)\leq D^+f(x)\leq u^\prime_+(x)\leq u^\prime_-(x).
+\end{equation*}
+The first inequality follows by taking $\liminf_{t\to0^+}$ in $k(x-t,x)\leq k_f(x-t,x)$, the left-hand side having a limit by Lemma \ref{L-corner}(i). The second one is \Of, since $x\in]a,b[$ is a contact point with $f$. The third one follows by taking $\limsup_{t\to0^+}$ in $k_f(x,x+t)\leq k(x,x+t)$. The last one is Lemma \ref{L-corner}(ii).
+
+\smallskip
+
+Hence all these quantities are equal: $u^\prime(x)$ exists, and
+\begin{equation*}
+u^\prime(x)=D_-f(x)=D^+f(x),
+\end{equation*}
+which is assertion (i) of Theorem \ref{T-main} for $f$. In particular, \Of\ holds with equality at every contact point in $]a,b[$, so that a point where $D_-f<D^+f$ cannot be a contact point.
+
+\medskip
+
+{\bf Step 4: contact points with \boldmath$g$\unboldmath.} Assume that $u(x)=g(x)$. We apply Step 3 to $\widetilde u:=-u$ and $\widetilde f:=-g$, using \Rv{} and Lemma \ref{L-sym}: we have $\widetilde u(x)=\widetilde f(x)$, and \Of\ for $\widetilde f$ is \Og. We get $\widetilde u^\prime(x)=D_-\widetilde f(x)=D^+\widetilde f(x)$, i.e.
+\begin{equation*}
+u^\prime(x)=D^-g(x)=D_+g(x),
+\end{equation*}
+which is assertion (i) of Theorem \ref{T-main} for $g$.
+\end{proof}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[font=\footnotesize]
+% left: excluded
+\begin{scope}[x=1.15cm, y=1.1cm, declare function={U(\t)=1.9-0.6*abs(\t-2.5)-0.04*(\t-2.5)^2; F(\t)=1.9-0.6*abs(\t-2.5)-0.25*(\t-2.5)^2;}]
+  \draw[->, gray] (-0.1,0) -- (5.3,0) node[right] {$x$};
+  \draw[thick, gray, densely dashed] (0,2.75) -- (5,2.75) node[right, black] {$g$};
+  \draw[thick, gray, domain=0.6:4.4, samples=60] plot (\x,{F(\x)}) node[right, black] {$f$};
+  \draw[very thick, red!60!black, domain=0.3:4.7, samples=60] plot (\x,{U(\x)}) node[right] {$u$};
+  \draw[thick, densely dashed] (1.9,{1.9-0.6*0.6}) -- (3.2,{1.9+0.6*0.7});
+  \draw[thick, densely dashed] (1.8,{1.9+0.6*0.7}) -- (3.1,{1.9-0.6*0.6});
+  \fill (2.5,1.9) circle (1.5pt);
+  \draw[densely dotted] (2.5,1.9) -- (2.5,0) node[below] {$x$};
+  \node[align=center] at (2.5,-0.75) {concave corner of $u$ at a contact point:\\ $f$ has one too, so \Of\ fails};
+  \node[red!70!black, font=\bfseries\footnotesize] at (0.55,2.45) {excluded};
+\end{scope}
+% right: what remains
+\begin{scope}[shift={(7.4,0)}, x=1.15cm, y=1.1cm, declare function={V(\t)=1.9-0.12*(\t-2.5)^2+0.15*(\t-2.5); G(\t)=1.9-0.45*(\t-2.5)^2+0.15*(\t-2.5);}]
+  \draw[->, gray] (-0.1,0) -- (5.3,0) node[right] {$x$};
+  \draw[thick, gray, densely dashed] (0,2.75) -- (5,2.75) node[right, black] {$g$};
+  \draw[thick, gray, domain=0.6:4.4, samples=60, smooth] plot (\x,{G(\x)}) node[right, black] {$f$};
+  \draw[very thick, red!60!black, domain=0.3:4.7, samples=60, smooth] plot (\x,{V(\x)}) node[right] {$u$};
+  \draw[thick, densely dashed] (1.3,{1.9-0.15*1.2}) -- (3.7,{1.9+0.15*1.2});
+  \fill (2.5,1.9) circle (1.5pt);
+  \node[above] at (2.5,2.02) {$u^\prime(x)=D_-f(x)=D^+f(x)$};
+  \draw[densely dotted] (2.5,1.9) -- (2.5,0) node[below] {$x$};
+  \node[align=center] at (2.5,-0.75) {under \Of: one tangent,\\ shared by $u$ and $f$};
+\end{scope}
+\end{tikzpicture}
+\caption{Lemma \ref{L-exist} at a point $x$ of contact with $f$. Since $f\leq u$ with equality at $x$, the slopes of $u$ bound those of $f$, and Lemma \ref{L-corner} and \Of\ close the chain $u^\prime_-(x)\leq D_-f(x)\leq D^+f(x)\leq u^\prime_+(x)\leq u^\prime_-(x)$. Left: a concave corner of $u$, which Lemma \ref{L-corner} allows, would force a concave corner of $f$, i.e. $D_-f(x)>D^+f(x)$, which \Of\ forbids. Right: hence $u$ is differentiable at $x$, and its tangent is the common value of the Dini derivatives of $f$.}\label{Fig-contact}
+\end{figure}
+
+We now turn to the strict differentiability of $u$.
+
+\begin{lemma}[Strict differentiability]\label{L-strict}
+Assume that \Of\ and \Og\ hold. Let $x_0\in[a,b]$ and let $\mathcal{W}$ be a neighbourhood of $u^\prime(x_0)$ in $[-\infty,\infty]$. Then there exists $r>0$ such that
+\begin{equation*}
+k(s,t)\in\mathcal{W}\hbox{ for all }s<t\hbox{ in }[x_0-r,x_0+r]\cap[a,b].
+\end{equation*}
+\end{lemma}
+
+\begin{proof}[\bf Proof of Lemma \ref{L-strict}]
+Let $p:=u^\prime(x_0)$, which exists by Lemma \ref{L-exist}. We first reduce to an interval of lower type and to $p\neq-\infty$ (Step 1). We then treat the one-sided cases $x_0\leq s<t$ and $s<t\leq x_0$, for $p\in\RR$ (Step 2) and for $p=+\infty$ (Step 3), then the case $s<x_0<t$ (Step 4), and we conclude by choosing the parameters $\eta$, $\ell$ and $r$ in terms of $\mathcal{W}$ (Step 5).
+
+\bigskip
+
+{\bf Step 1: reductions.} The interval $J:=[x_0-\frac{\rho_0}2,x_0+\frac{\rho_0}2]\cap[a,b]$ has length $\leq\rho_0$, so that it is of lower type or of upper type by Lemma \ref{L-dicho}.
+If $J$ is of upper type, we replace $u$ by $-u$ (see \Rv{} and Lemma \ref{L-sym}), which changes $p$ into $-p$ and $\mathcal{W}$ into $-\mathcal{W}$. So we may assume that $J$ is of lower type. If $p=-\infty$, we replace $u$ by $u(a+b-\cdot)$ (see \Rh{} and Lemma \ref{L-sym}), which preserves the lower type and changes $p$ into $+\infty$. So we may also assume that $p\neq-\infty$. Every neighbourhood of $p$ in $[-\infty,\infty]$ contains an interval which is a neighbourhood of $p$, so that we may assume that $\mathcal{W}$ is an interval.
+
+\bigskip
+
+{\bf Step 2: the case \boldmath$p\in\RR$\unboldmath.} Let $\eta\in]0,1]$ and set $M:=|p|+4$. Since $E(M,2r)\to0$ as $r\to0$ by Lemma \ref{L-Theta}(ii), and $k(x_0,x_0+h)\to p$ and $k(x_0-h,x_0)\to p$ as $h\to0^+$, there exists $r>0$ such that:
+\begin{align*}
+&{\scriptstyle\bullet}\ [x_0-2r,x_0+2r]\cap[a,b]\subset J;\\
+&{\scriptstyle\bullet}\ E(M,2r)\leq\eta;\\
+&{\scriptstyle\bullet}\ |k(x_0,x_0+h)-p|\leq\eta\quad\hbox{and}\quad|k(x_0-h,x_0)-p|\leq\eta\hbox{ for }0<h\leq2r\hbox{ (when defined)};\\
+&{\scriptstyle\bullet}\ x_0+2r\leq b\hbox{ if }x_0<b;\\
+&{\scriptstyle\bullet}\ x_0-2r\geq a\hbox{ if }x_0>a.
+\end{align*}
+
+\medskip
+
+{\bf Step 2.1: right side \boldmath$x_0\leq s<t\leq x_0+r$\unboldmath, a slope at scale \boldmath$r$\unboldmath.} For $y\in]x_0,x_0+2r]$, set $e(y):=k(x_0,y)-p$, so that
+\begin{equation*}
+|e(y)|\leq\eta\quad\hbox{and}\quad u(y)-u(x_0)=(p+e(y))(y-x_0),
+\end{equation*}
+and set $e(x_0):=0$. Since $s+r\leq x_0+2r$,
+\begin{align*}
+u(s+r)-u(s)&=(p+e(s+r))(s+r-x_0)-(p+e(s))(s-x_0)\\
+&=pr+(s+r-x_0)e(s+r)-(s-x_0)e(s).
+\end{align*}
+As $0\leq s-x_0\leq r$ and $s+r-x_0\leq2r$, we have $|(s+r-x_0)e(s+r)|\leq2r\eta$ and $|(s-x_0)e(s)|\leq r\eta$, whence
+\begin{equation*}
+k(s,s+r)\geq p-3\eta.
+\end{equation*}
+
+\medskip
+
+{\bf Step 2.2: right side, lower bound.} We apply Lemma \ref{L-mono}(i) at the point $s$, with $\ell:=p-3\eta$ and scale $r$. We have $[s,s+r]\subset[x_0,x_0+2r]\subset J$ and $|\ell|+1\leq|p|+3\eta+1\leq M$, so that $E(|\ell|+1,r)\leq E(M,2r)\leq\eta\leq1$, and $k(s,s+r)\geq\ell$ by Step 2.1. Hence $k(s,s+\rho)\geq\ell-E(|\ell|+1,r)\geq p-4\eta$ for all $\rho\in]0,r]$, and taking $\rho=t-s\leq r$ we get
+\begin{equation*}
+k(s,t)\geq p-4\eta.
+\end{equation*}
+
+\medskip
+
+{\bf Step 2.3: right side, upper bound.} If $s=x_0$, the bound $k(x_0,t)\leq p+\eta$ holds by the choice of $r$. Otherwise, we apply Lemma \ref{L-mono}(ii) at the point $t$, with $\ell:=p+\eta$ and scale $t-x_0$. We have $[x_0,t]\subset J$, $|\ell|+1\leq|p|+2\leq M$ and $t-x_0\leq r$, so that $E(|\ell|+1,t-x_0)\leq\eta\leq1$, and $k(x_0,t)\leq\ell$. Hence $k(t-\rho,t)\leq p+2\eta$ for all $\rho\in]0,t-x_0]$, and taking $\rho=t-s$ we get
+\begin{equation*}
+k(s,t)\leq p+2\eta.
+\end{equation*}
+
+\medskip
+
+{\bf Step 2.4: left side \boldmath$x_0-r\leq s<t\leq x_0$\unboldmath.} For $y\in[x_0-2r,x_0[$, set $e(y):=k(y,x_0)-p$, so that $|e(y)|\leq\eta$ and $u(x_0)-u(y)=(p+e(y))(x_0-y)$, and set $e(x_0):=0$. Since $t-r\geq x_0-2r$,
+\begin{align*}
+u(t)-u(t-r)&=(p+e(t-r))(x_0-t+r)-(p+e(t))(x_0-t)\\
+&=pr+(x_0-t+r)e(t-r)-(x_0-t)e(t),
+\end{align*}
+so that $k(t-r,t)\leq p+3\eta$. As in Steps 2.2 and 2.3, with the roles of (i) and (ii) in Lemma \ref{L-mono} exchanged, Lemma \ref{L-mono}(ii) at $t$, with $\ell:=p+3\eta$ and scale $r$, gives $k(t-\rho,t)\leq p+4\eta$ for $\rho\in]0,r]$, and so $k(s,t)\leq p+4\eta$. Moreover, $k(s,x_0)\geq p-\eta$, and Lemma \ref{L-mono}(i) at $s$, with $\ell:=p-\eta$ and scale $x_0-s\leq r$, gives $k(s,s+\rho)\geq p-2\eta$ for $\rho\in]0,x_0-s]$, and so $k(s,t)\geq p-2\eta$.
+
+\bigskip
+
+{\bf Step 3: the case \boldmath$p=+\infty$\unboldmath.} In this case, only lower bounds on the slopes are needed, since every neighbourhood of $+\infty$ contains some $[\ell-1,+\infty]$. Let $\ell>0$ and let $r_1>0$ be such that:
+\begin{align*}
+&{\scriptstyle\bullet}\ [x_0-r_1,x_0+r_1]\cap[a,b]\subset J;\\
+&{\scriptstyle\bullet}\ E(\ell+1,r_1)\leq1;\\
+&{\scriptstyle\bullet}\ k(x_0,x_0+h)\geq\ell+1\quad\hbox{and}\quad k(x_0-h,x_0)\geq\ell+1\hbox{ for }0<h\leq r_1\hbox{ (when defined)}.
+\end{align*}
+
+\medskip
+
+{\bf Step 3.1: left side.} Let $s<t\leq x_0$ with $x_0-s\leq r_1$. Then $k(s,x_0)\geq\ell+1\geq\ell$. We apply Lemma \ref{L-mono}(i) at $s$, with this $\ell$ and scale $x_0-s\leq r_1$: we have $[s,x_0]\subset J$ and $E(\ell+1,x_0-s)\leq E(\ell+1,r_1)\leq1$. This gives $k(s,s+\rho)\geq\ell-1$ for $\rho\in]0,x_0-s]$, and taking $\rho=t-s$ we get
+\begin{equation*}
+k(s,t)\geq\ell-1.
+\end{equation*}
+
+\medskip
+
+{\bf Step 3.2: right side.} If $x_0=b$, we take $r:=r_1$. Assume that $x_0<b$. Shrinking $r_1$, we may assume that $z_1:=x_0+r_1\leq b$. The function
+\begin{equation*}
+s\longmapsto k(s,z_1)=\frac{u(z_1)-u(s)}{z_1-s}
+\end{equation*}
+is continuous on $[x_0,z_1[$, with $k(x_0,z_1)\geq\ell+1$. So there is $r\in]0,\frac{r_1}2]$ such that $k(s,z_1)\geq\ell$ for $s\in[x_0,x_0+r]$. Let $x_0\leq s<t\leq x_0+r$. Then
+\begin{equation*}
+t-s\leq r\leq\frac{r_1}2\leq r_1-r\leq z_1-s\leq r_1.
+\end{equation*}
+We apply Lemma \ref{L-mono}(i) at $s$, with $\ell$ and scale $z_1-s$: we have $[s,z_1]\subset J$, $E(\ell+1,z_1-s)\leq E(\ell+1,r_1)\leq1$ and $k(s,z_1)\geq\ell$. This gives $k(s,s+\rho)\geq\ell-1$ for all $\rho\in]0,z_1-s]$, and taking $\rho=t-s$ we get $k(s,t)\geq\ell-1$. In all cases, $r\leq r_1$, so that Step 3.1 applies on $[x_0-r,x_0]$.
+
+\bigskip
+
+{\bf Step 4: the case \boldmath$s<x_0<t$\unboldmath.} We have
+\begin{equation*}
+u(t)-u(s)=[u(x_0)-u(s)]+[u(t)-u(x_0)]=(x_0-s)k(s,x_0)+(t-x_0)k(x_0,t),
+\end{equation*}
+i.e.
+\begin{equation*}
+k(s,t)=\frac{x_0-s}{t-s}k(s,x_0)+\frac{t-x_0}{t-s}k(x_0,t).
+\end{equation*}
+The weights are positive with sum $1$, so that $k(s,t)$ lies between $k(s,x_0)$ and $k(x_0,t)$. These are covered by the one-sided cases (with $t=x_0$, resp. $s=x_0$), with the same $r$. Hence, for all $s<t$ in $[x_0-r,x_0+r]\cap[a,b]$,
+\begin{equation*}
+k(s,t)\in[p-4\eta,p+4\eta]\hbox{ if }p\in\RR,\quad\hbox{and}\quad k(s,t)\in[\ell-1,+\infty[\hbox{ if }p=+\infty.
+\end{equation*}
+
+\bigskip
+
+{\bf Step 5: end of the proof.} By Step 1, $\mathcal{W}$ is an interval which is a neighbourhood of $p$, and $p\neq-\infty$.
+
+\medskip
+
+{\bf Step 5.1: the case \boldmath$p\in\RR$\unboldmath.} Since $\mathcal{W}$ is a neighbourhood of $p$, there is $\eta\in]0,1]$ such that $[p-4\eta,p+4\eta]\subset\mathcal{W}$. Let $r>0$ be given by Step 2 for this $\eta$. By Steps 2 and 4,
+\begin{equation*}
+k(s,t)\in[p-4\eta,p+4\eta]\subset\mathcal{W}\hbox{ for all }s<t\hbox{ in }[x_0-r,x_0+r]\cap[a,b].
+\end{equation*}
+
+\medskip
+
+{\bf Step 5.2: the case \boldmath$p=+\infty$\unboldmath.} Since $\mathcal{W}$ is a neighbourhood of $+\infty$ in $[-\infty,\infty]$, there is $c\in\RR$ such that $]c,+\infty]\subset\mathcal{W}$. Let $\ell>\max\{0,c+1\}$, so that $[\ell-1,+\infty]\subset\mathcal{W}$, and let $r>0$ be given by Step 3 for this $\ell$. By Steps 3 and 4,
+\begin{equation*}
+k(s,t)\in[\ell-1,+\infty[\subset\mathcal{W}\hbox{ for all }s<t\hbox{ in }[x_0-r,x_0+r]\cap[a,b].
+\end{equation*}
+
+\medskip
+
+{\bf Step 5.3: back to the original solution.} If $u$ was replaced by $-u$ in Step 1, the conclusion for $-u$ and $-\mathcal{W}$ is the conclusion for $u$ and $\mathcal{W}$, since $k_{-u}=-k_u$. If $u$ was replaced by $\widetilde u:=u(a+b-\cdot)$, the conclusion for $\widetilde u$ at $\widehat x_0:=a+b-x_0$ and $-\mathcal{W}$ is the conclusion for $u$ at $x_0$ and $\mathcal{W}$, since $k_{\widetilde u}(s,t)=-k_u(\widehat t,\widehat s)$ by Lemma \ref{L-sym}(iv) and the reflection maps $[\widehat x_0-r,\widehat x_0+r]$ onto $[x_0-r,x_0+r]$. This completes the proof.
+\end{proof}
+
+We can now prove the main result.
+
+\begin{proof}[\bf Proof of Theorem \ref{T-main}]
+By Lemma \ref{L-exist}, $u^\prime(x)$ exists in $[-\infty,\infty]$ for every $x\in[a,b]$, and assertion (i) holds. Assertion (ii) is Lemma \ref{L-strict}.
+
+\medskip
+
+It remains to show that $u$ has Tonelli's partial regularity. We first prove that $u^\prime$ is continuous. Let $x_0\in[a,b]$, let $\mathcal{W}$ be a closed neighbourhood of $u^\prime(x_0)$ in $[-\infty,\infty]$, and let $r>0$ be given by Lemma \ref{L-strict}. Let $x\in[x_0-r,x_0+r]\cap[a,b]$. Then
+\begin{equation*}
+u^\prime(x)=\lim_{h\to0^+}k(x,x+h)\quad\hbox{or}\quad u^\prime(x)=\lim_{h\to0^+}k(x-h,x),
+\end{equation*}
+where at least one of these two families of slopes has both endpoints in $[x_0-r,x_0+r]\cap[a,b]$ for $h$ small. These slopes belong to $\mathcal{W}$, and $\mathcal{W}$ is closed, so that $u^\prime(x)\in\mathcal{W}$. Since the closed neighbourhoods of $u^\prime(x_0)$ form a basis of neighbourhoods in the compact metrizable space $[-\infty,\infty]$, this shows that
+\begin{equation*}
+u^\prime\in C\big([a,b];[-\infty,\infty]\big).
+\end{equation*}
+Consequently, the set
+\begin{equation*}
+\Omega_u=\big\{x\in[a,b]:u^\prime(x)\in\RR\big\}
+\end{equation*}
+is open in $[a,b]$, as the preimage of the open set $\RR$ by the continuous map $u^\prime$. Finally, since $u\in W^{1,1}([a,b])$, its classical derivative is finite $\mathcal{L}^1$-a.e., so that $\mathcal{L}^1([a,b]\setminus\Omega_u)=0$.
+\end{proof}
+
+\begin{remark}[Comparison with the methods of \cite{sychev92} and \cite{mandallena18}]
+In \cite{mandallena18} (see also \cite{gratwick-sychev19}), the comparison function is the chord truncated by the obstacles, and the price to pay is the term $\omega(|k_u(s,t)|,|s-t|)|s-t|$ in \cite[(A$_3$)]{mandallena18}, which leads to the Dini-type condition \cite[(1.2)]{mandallena18}. Here, the only comparison functions are the chords $u_{\sigma,\tau}$ with $u\leq u_{\sigma,\tau}$ (near the lower obstacle) or $u\geq u_{\sigma,\tau}$ (near the upper one): they are admissible whatever the obstacles are (see Lemma \ref{L-free}), and they give \cite[(A$_3$)]{mandallena18} with $\omega\equiv0$ on these intervals. In \cite{sychev92}, comparison with all short chords gives, on every short interval, the estimate of Lemma \ref{L-good}, hence the two-sided inequality
+\begin{equation*}
+|u_{x,z}(y)-u(y)|\leq\Theta\big(|k(x,z)|,z-x\big)\sqrt{(z-x)\min\{y-x,z-y\}}:
+\end{equation*}
+the solution is almost affine at small scales. Here, only the chords on the free side are available, so that we only get one half of this inequality, namely \eqref{conc} near the lower obstacle (approximate concavity, Lemma \ref{L-conc}). The missing half is given, at the contact points, by the obstacle itself: this is where \Of\ and \Og\ are used, and only there.
+\end{remark}
+
+\medskip
+
+\noindent{\bf Acknowledgements.} The third author warmly thanks M.~A.~Sychev, who visited the MIPA laboratory in May--June 2011. Following this visit, Sychev introduced him to the regularity of one-dimensional variational problems, which led to \cite{mandallena18,mandallena19}, and posed the problem of Tonelli-regular obstacles studied in this paper.
+
+\begin{thebibliography}{BGH98}
+
+\bibitem[BM85]{ball-mizel85}
+J.~M. Ball and V.~J. Mizel.
+\newblock One-dimensional variational problems whose minimizers do not satisfy the {E}uler--{L}agrange equation.
+\newblock {\em Arch. Rational Mech. Anal.}, 90(4):325--388, 1985. \url{https://doi.org/10.1007/BF00276295}.
+
+\bibitem[BGH98]{buttazzo-Giaquinta-hildebrandt98}
+G.~Buttazzo, M.~Giaquinta, and S.~Hildebrandt.
+\newblock {\em One-dimensional variational problems}, volume~15 of {\em Oxford Lecture Series in Mathematics and its Applications}.
+\newblock The Clarendon Press, Oxford University Press, New York, 1998. \url{https://doi.org/10.1093/oso/9780198504658.001.0001}.
+
+\bibitem[CV85]{clarke-vinter85}
+F.~H. Clarke and R.~B. Vinter.
+\newblock Regularity properties of solutions to the basic problem in the calculus of variations.
+\newblock {\em Trans. Amer. Math. Soc.}, 289(1):73--98, 1985. \url{https://doi.org/10.1090/S0002-9947-1985-0779053-3}.
+
+\bibitem[GP11]{gratwick-preiss11}
+R.~Gratwick and D.~Preiss.
+\newblock A one-dimensional variational problem with continuous {L}agrangian and singular minimizer.
+\newblock {\em Arch. Ration. Mech. Anal.}, 202(1):177--211, 2011. \url{https://doi.org/10.1007/s00205-011-0413-3}.
+
+\bibitem[GS19]{gratwick-sychev19}
+R.~Gratwick and M.~A. Sychev.
+\newblock One-dimensional variational obstacle problems.
+\newblock {\em Pure Appl. Funct. Anal.}, 4(3):547--558, 2019. \url{https://www.research.ed.ac.uk/en/publications/one-dimensional-variational-obstacle-problems/}.
+
+\bibitem[GST16]{GST16}
+R.~Gratwick, M.~A. Sychev, and A.~S. Tersenov.
+\newblock Regularity and singularity phenomena for one-dimensional variational problems with singular ellipticity.
+\newblock {\em Pure Appl. Funct. Anal.}, 1(3):397--416, 2016. \url{https://www.research.ed.ac.uk/en/publications/regularity-and-singularity-phenomena-for-one-dimensional-variatio/}.
+
+\bibitem[Man18]{mandallena18}
+J.-P. Mandallena.
+\newblock On the regularity of solutions of one-dimensional variational obstacle problems.
+\newblock {\em Adv. Calc. Var.}, 11(2):203--222, 2018. \url{https://doi.org/10.1515/acv-2016-0030}.
+
+\bibitem[Man19]{mandallena19}
+J.-P. Mandallena.
+\newblock A necessary and sufficient condition for {$C^1$}-regularity of solutions of one-dimensional variational obstacle problems.
+\newblock {\em Rend. Semin. Mat. Univ. Padova}, 142:103--134, 2019. \url{https://doi.org/10.4171/RSMUP/33}.
+
+\bibitem[Res94]{Reshetnyak-book82}
+Yu.~G. Reshetnyak.
+\newblock {\em Stability theorems in geometry and analysis}, volume 304 of {\em Mathematics and its Applications}.
+\newblock Kluwer Academic Publishers Group, Dordrecht, 1994. \url{https://doi.org/10.1007/978-94-015-8360-2}.
+
+\bibitem[Syc89]{sychev89}
+M.~A. Sychev.
+\newblock On the regularity of solutions of a one-dimensional variational problem.
+\newblock In {\em Proceedings of the {XXVII} {A}ll-{U}nion {S}cientific {S}tudent {C}onference ``{T}he {S}tudent and {S}cientific-{T}echnological {P}rogress'' ({N}ovosibirsk, 1989)}, pages 60--65. Novosibirsk. Gos. Univ., Novosibirsk, 1989.
+
+\bibitem[Syc91]{sychev91}
+M.~A. Sychev.
+\newblock Regularity of solutions of some variational problems.
+\newblock {\em Dokl. Akad. Nauk SSSR}, 316(6):1326--1330, 1991. \url{https://www.mathnet.ru/eng/dan6178}.
+
+\bibitem[Syc92]{sychev92}
+M.~A. Sychev.
+\newblock On the regularity of solutions of variational problems.
+\newblock {\em Mat. Sb.}, 183(4):118--142, 1992. English transl.: {\em Russian Acad. Sci. Sb. Math.}, 75(2):535--556, 1993. \url{https://doi.org/10.1070/SM1993v075n02ABEH003397}.
+
+\bibitem[Syc11]{sychev11}
+M.~A. Sychev.
+\newblock Another theorem of classical solvability `in small' for one-dimensional variational problems.
+\newblock {\em Arch. Ration. Mech. Anal.}, 202(1):269--294, 2011. \url{https://doi.org/10.1007/s00205-011-0416-0}.
+
+\bibitem[Ton23]{tonelli}
+L.~Tonelli.
+\newblock {\em Fondamenti di calcolo delle variazioni}, volume~II.
+\newblock Zanichelli, Bologna, 1923.
+
+\end{thebibliography}
+
+\end{document}
