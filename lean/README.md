@@ -91,8 +91,8 @@ The comments inside the Lean files still use the numbering of an earlier draft.
 | Paper | Lean |
 |---|---|
 | Lemma 4.1 (approximate concavity), inequality (4.1) | `LowerFrame.approx_concave`, `approx_concave_right`, `approx_concave_left`, `approx_concave_center` |
-| Lemma 4.3 (one-sided monotonicity of slopes) | `LowerFrame.slope_mono_right`, `LowerFrame.slope_mono_left` |
-| Lemma 4.4 (one-sided derivatives, no convex corner) | `LowerFrame.exists_right_deriv`, `LowerFrame.exists_left_deriv`, `LowerFrame.no_convex_corner` |
+| Lemma 4.2 (one-sided monotonicity of slopes) | `LowerFrame.slope_mono_right`, `LowerFrame.slope_mono_left` |
+| Lemma 4.3 (one-sided derivatives, no convex corner) | `LowerFrame.exists_right_deriv`, `LowerFrame.exists_left_deriv`, `LowerFrame.no_convex_corner` |
 
 ### Section 5 of the paper (proof of the main result) — `Project/Section4.lean`
 
